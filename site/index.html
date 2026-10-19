@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tölvukaup fyrir Stúdíó &amp; Tækninefnd</title>
+    <style>
+      :root {
+        --bg: #0f1419;
+        --card: #182028;
+        --card-alt: #1e2934;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --red: #dc2626;
+        --red-soft: rgba(220, 38, 38, 0.16);
+        --green: #10b981;
+        --green-soft: rgba(16, 185, 129, 0.14);
+        --amber: #f59e0b;
+        --amber-soft: rgba(245, 158, 11, 0.14);
+        --border: #2a3644;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .top-nav {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .nav-tab {
+        display: inline-block;
+        padding: 0.45rem 0.95rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        background: var(--card);
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .nav-tab.active {
+        background: var(--red-soft);
+        color: #ffffff;
+        border-color: var(--red);
+      }
+      .nav-tab:hover {
+        color: #ffffff;
+        border-color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        background: var(--red-soft);
+        color: #fca5a5;
+        border: 1px solid rgba(220, 38, 38, 0.4);
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+        margin: 0.75rem 0 0.5rem;
+        line-height: 1.2;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 1.08rem;
+        margin: 0 0 2rem;
+        max-width: 720px;
+      }
+      .section-title {
+        font-size: 1.3rem;
+        margin: 2.5rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 1rem;
+      }
+      .spec-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+      }
+      .spec-label {
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+      }
+      .spec-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.4rem;
+      }
+      .spec-note {
+        font-size: 0.88rem;
+        color: var(--muted);
+        margin: 0;
+      }
+      .no-tag {
+        color: #fca5a5;
+        font-weight: 600;
+      }
+      .tier-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 1.15rem;
+      }
+      .tier-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+      .tier-card.featured {
+        border: 2px solid var(--green);
+        background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--card) 100%);
+      }
+      .tier-pill {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.22rem 0.65rem;
+        border-radius: 999px;
+        margin-bottom: 0.75rem;
+        width: fit-content;
+      }
+      .pill-good {
+        background: rgba(59, 130, 246, 0.16);
+        color: #93c5fd;
+      }
+      .pill-best {
+        background: var(--green-soft);
+        color: #6ee7b7;
+      }
+      .pill-power {
+        background: var(--amber-soft);
+        color: #fcd34d;
+      }
+      .tier-title {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin: 0 0 0.25rem;
+      }
+      .tier-chip {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 1rem;
+      }
+      .tier-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.25rem;
+        font-size: 0.93rem;
+      }
+      .tier-list li {
+        padding: 0.35rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .tier-list li:last-child {
+        border-bottom: 0;
+      }
+      .price-box {
+        background: var(--card-alt);
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+        margin-top: auto;
+      }
+      .price-usd {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+      .price-isk {
+        font-size: 0.86rem;
+        color: var(--muted);
+      }
+      .alert-box {
+        background: linear-gradient(135deg, rgba(220, 38, 38, 0.18), rgba(24, 32, 40, 0.95));
+        border: 2px solid var(--red);
+        border-radius: 16px;
+        padding: 1.4rem 1.5rem;
+        margin-top: 2rem;
+      }
+      .alert-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #fca5a5;
+        margin: 0 0 0.5rem;
+      }
+      .alert-box p {
+        margin: 0.4rem 0;
+        font-size: 0.95rem;
+      }
+      .alert-steps {
+        margin: 0.75rem 0 0;
+        padding-left: 1.25rem;
+        font-size: 0.93rem;
+      }
+      .alert-steps li {
+        margin-bottom: 0.4rem;
+      }
+      code {
+        background: rgba(0, 0, 0, 0.35);
+        padding: 0.15rem 0.4rem;
+        border-radius: 5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.86em;
+        color: #fde68a;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .info-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+      }
+      .info-card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      .info-card p {
+        margin: 0;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      footer a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="top-nav">
+        <a class="nav-tab active" href="./">1. Stúdíó-tölva (Fyrir stúdíó)</a>
+        <a class="nav-tab" href="andri.html">2. iPhone + Pixel + 32 GB Mac</a>
+        <a class="nav-tab" href="dev-flow.html">3. Þróunarflæði &amp; Tengingar</a>
+      </nav>
+      <span class="badge">Stúdíó &amp; Tækninefnd · Tölvukaup</span>
+      <h1>Hvaða Mac-tölvu á að kaupa fyrir stúdíóið?</h1>
+      <p class="subtitle">
+        Einfalt yfirlit yfir tæknikröfur (specs) og verð á notuðum vélum á eftirmarkaði í Seattle,
+        svo tölvan nýtist bæði í útsendingar í stúdíóinu og í bakgrunnsvinnslu fyrir Tækninefnd.
+      </p>
+
+      <h2 class="section-title">1. Fjórar einfaldar grunnkröfur (Specs)</h2>
+      <div class="spec-grid">
+        <div class="spec-card">
+          <div class="spec-label">1. Gerð tölvu</div>
+          <div class="spec-value">Mac mini eða Mac Studio</div>
+          <p class="spec-note">
+            Borðtölva á borðið. <span class="no-tag">Ekki MacBook fartölvu</span> (þarf fasta nettengingu og má ekki sofna þegar loki er lokað).
+          </p>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">2. Örgjörvi (Chip)</div>
+          <div class="spec-value">M2 Pro, M4 eða M1/M2 Max</div>
+          <p class="spec-note">
+            Ræður léttilega við margar myndavélar í OBS, klippingu og þjöppun án þess að hökta.
+          </p>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">3. Vinnsluminni (RAM)</div>
+          <div class="spec-value">16 GB eða 32 GB+</div>
+          <p class="spec-note">
+            <strong>16 GB er algjört lágmark</strong> (32 GB enn betra). <span class="no-tag">Aldrei kaupa 8 GB vél.</span>
+          </p>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">4. Diskur &amp; Net</div>
+          <div class="spec-value">512 GB+ SSD &amp; Ethernet</div>
+          <p class="spec-note">
+            Lágmark 512 GB (helst 1 TB) fyrir upptökur, og <strong>netsnúra (Ethernet)</strong> beint í borðið.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="section-title">2. Þrír valkostir á eftirmarkaði í Bandaríkjunum (Verð í okt. 2026)</h2>
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-good">Kostur A · Ódýrastur &amp; Nýlegur</span>
+            <h3 class="tier-title">Mac mini (M4, 2024)</h3>
+            <div class="tier-chip">10-kjarna Apple M4 örgjörvi</div>
+            <ul class="tier-list">
+              <li><strong>RAM:</strong> 16 GB (eða 24/32 GB)</li>
+              <li><strong>Geymsla:</strong> 512 GB SSD</li>
+              <li><strong>Tengi:</strong> 3× Thunderbolt 4, HDMI, Gigabit Ethernet, 2× USB-C að framan</li>
+              <li><strong>Stærð:</strong> Örsmá (12,7 × 12,7 cm, 0,7 kg), kemst í bakpoka</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$500–$700</div>
+            <div class="price-isk">~63.000–88.000 kr. fyrir VSK (~85.000–115.000 kr. m/VSK)</div>
+          </div>
+        </div>
+
+        <div class="tier-card featured">
+          <div>
+            <span class="tier-pill pill-best">Kostur B · Meðmæli (Bestu kaupin)</span>
+            <h3 class="tier-title">Mac mini (M2 Pro, 2023)</h3>
+            <div class="tier-chip">10/12-kjarna M2 Pro · 16/19-kjarna skjástýring</div>
+            <ul class="tier-list">
+              <li><strong>RAM:</strong> 16 GB eða <strong>32 GB</strong></li>
+              <li><strong>Geymsla:</strong> 512 GB eða <strong>1 TB SSD</strong></li>
+              <li><strong>Tengi:</strong> 4× Thunderbolt 4 + <strong>2× hefðbundin USB-A tengi</strong> (frábært fyrir myndavélar og hljóðkort) + HDMI + Ethernet</li>
+              <li><strong>Tvöföld minnisbandbreidd</strong> fyrir myndvinnslu</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$750–$1.050</div>
+            <div class="price-isk">~95.000–132.000 kr. fyrir VSK (16–32 GB / 512 GB–1 TB)</div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-power">Kostur C · Stúdíó-tröll</span>
+            <h3 class="tier-title">Mac Studio (M1/M2 Max)</h3>
+            <div class="tier-chip">10/12-kjarna Max · 32-kjarna skjástýring</div>
+            <ul class="tier-list">
+              <li><strong>RAM:</strong> <strong>32 GB eða 64 GB</strong></li>
+              <li><strong>Geymsla:</strong> <strong>1–2 TB SSD</strong></li>
+              <li><strong>Tengi:</strong> SD-kortalesari að framan, 4× Thunderbolt 4, 2× USB-A, 10Gb Ethernet, HDMI</li>
+              <li>Sérhæfðir ProRes myndkubbar fyrir þunga 4K fjölmyndavélavinnslu</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$1.400–$1.700</div>
+            <div class="price-isk">~175.000–215.000 kr. fyrir VSK á eftirmarkaði</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-box">
+        <div class="alert-title">⚠️ GRÍÐARLEGA MIKILVÆGT ÁÐUR EN KEYPT ER NOTAÐ: Apple ID &amp; Fyrirtækjalæsing</div>
+        <p>
+          Ef notuð Mac-tölva (eða iPhone) er ennþá tengd við Apple ID fyrri eiganda (<strong>Activation Lock / Find My</strong>)
+          eða fyrirtækisstýringu (<strong>MDM / Remote Management</strong>) þá er tækið <strong>algjörlega ónothæft á Íslandi</strong>.
+        </p>
+        <ol class="alert-steps">
+          <li>
+            <strong>Rétt núllstilling hjá seljanda:</strong> Seljandi verður að hafa keyrt <strong>System Settings → General → Transfer or Reset → Erase All Content and Settings</strong> (sem skráir vélina formlega út úr iCloud og Find My hjá Apple, ekki bara strauja diskinn).
+          </li>
+          <li>
+            <strong>Tengja við Wi-Fi í „Hello“ uppsetningunni í Seattle (til að afhjúpa faldar læsingar):</strong>
+            Án nets lítur læst eða óskiluð fyrirtækjavél út fyrir að vera opin á „Hello“ skjánum. Um leið og tölvan tengist Wi-Fi í uppsetningarferlinu hringir hún í þjóna Apple: ef hún er læst við gamalt Apple ID eða fyrirtæki (<em>Remote Management / MDM</em>) stoppar hún <strong>strax þar</strong>. Ef hún kemst alla leið inn á skjáborðið með Wi-Fi virkt er hún opin.
+          </li>
+          <li>
+            <strong>Endanleg staðfesting í Terminal á skjáborðinu (aðeins marktæk eftir Wi-Fi tengingu í skrefi 2):</strong>
+            Þegar komið er inn á skjáborðið í skrefi 2 er opnað <em>Terminal</em> og þessar tvær línur keyrðar til að sjá svart á hvítu að ekkert sé falið:
+            <br />
+            <code>system_profiler SPHardwareDataType | grep "Activation Lock"</code> &rarr; verður að segja <strong>Disabled</strong>
+            <br />
+            <code>profiles status -type enrollment</code> &rarr; verður að segja <strong>No</strong> á bæði DEP og MDM
+          </li>
+        </ol>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>📦 Af hverju að kaupa á eftirmarkaði í Seattle?</h3>
+          <p>
+            Notaður Apple markaður í Bandaríkjunum (Swappa.com og Craigslist) býður mun meira úrval af 16–32 GB vélum á lægra verði en hér heima
+            (ný Mac mini M4 16/512 GB kostar um 179.990 kr. á Íslandi). Mikilvægt er að láta kaupkvittun fylgja sendingu fyrir tollafgreiðslu.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>🤝 Samnýting stúdíós og Tækninefndar</h3>
+          <p>
+            Stúdíóið fær öfluga vél á borðið fyrir upptökur og útsendingar. Í bakgrunni (á lægsta forgangi sem truflar aldrei OBS/upptökur)
+            nýtist vélin í sjálfvirkar macOS byggingar og sparar dýra skýjareikninga.
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        <span>Tækninefnd &amp; Stúdíóhópur (Október 2026)</span>
+        <a href="andri.html">Sjá einnig: iPhone, Pixel &amp; 32 GB Dev Mac &rarr;</a>
+      </footer>
+    </div>
+  </body>
+</html>

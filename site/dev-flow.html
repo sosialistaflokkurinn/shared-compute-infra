@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Þróunarflæði &amp; Tengingar · Fartölva + 32 GB Mac + iPhone &amp; Pixel</title>
+    <style>
+      :root {
+        --bg: #0f1419;
+        --card: #182028;
+        --card-alt: #1e2934;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --red: #dc2626;
+        --red-soft: rgba(220, 38, 38, 0.16);
+        --green: #10b981;
+        --green-soft: rgba(16, 185, 129, 0.14);
+        --blue: #3b82f6;
+        --blue-soft: rgba(59, 130, 246, 0.16);
+        --amber: #f59e0b;
+        --amber-soft: rgba(245, 158, 11, 0.14);
+        --purple: #a855f7;
+        --purple-soft: rgba(168, 85, 247, 0.15);
+        --border: #2a3644;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .top-nav {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .nav-tab {
+        display: inline-block;
+        padding: 0.45rem 0.95rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        background: var(--card);
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .nav-tab.active {
+        background: var(--red-soft);
+        color: #ffffff;
+        border-color: var(--red);
+      }
+      .nav-tab:hover {
+        color: #ffffff;
+        border-color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        background: var(--green-soft);
+        color: #6ee7b7;
+        border: 1px solid rgba(16, 185, 129, 0.4);
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+        margin: 0.75rem 0 0.5rem;
+        line-height: 1.2;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 1.06rem;
+        margin: 0 0 2rem;
+        max-width: 800px;
+      }
+      .section-title {
+        font-size: 1.32rem;
+        margin: 2.5rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.45rem;
+      }
+      .diagram-box {
+        background: #121820;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1.5rem;
+        margin: 1.5rem 0 2rem;
+        overflow-x: auto;
+      }
+      .diagram-box svg {
+        width: 100%;
+        height: auto;
+        min-width: 680px;
+        display: block;
+      }
+      .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.15rem;
+      }
+      .flow-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.35rem;
+      }
+      .flow-card.highlight-green {
+        border-color: rgba(16, 185, 129, 0.5);
+      }
+      .flow-card.highlight-blue {
+        border-color: rgba(59, 130, 246, 0.5);
+      }
+      .flow-card.highlight-purple {
+        border-color: rgba(168, 85, 247, 0.5);
+      }
+      .flow-pill {
+        display: inline-block;
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.2rem 0.65rem;
+        border-radius: 999px;
+        margin-bottom: 0.7rem;
+      }
+      .pill-green {
+        background: var(--green-soft);
+        color: #6ee7b7;
+      }
+      .pill-blue {
+        background: var(--blue-soft);
+        color: #93c5fd;
+      }
+      .pill-purple {
+        background: var(--purple-soft);
+        color: #d8b4fe;
+      }
+      .flow-card h3 {
+        margin: 0 0 0.45rem;
+        font-size: 1.18rem;
+      }
+      .flow-card p {
+        margin: 0 0 0.75rem;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+      .flow-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      .flow-list li {
+        padding: 0.35rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      code {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 0.15rem 0.4rem;
+        border-radius: 5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.84em;
+        color: #fde68a;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1.25rem;
+      }
+      .metric-card {
+        background: var(--card-alt);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.15rem;
+      }
+      .metric-label {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+      }
+      .metric-val {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0.25rem 0;
+      }
+      .metric-sub {
+        font-size: 0.84rem;
+        color: var(--muted);
+        margin: 0;
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      footer a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="top-nav">
+        <a class="nav-tab" href="./">1. Stúdíó-tölva (Fyrir stúdíó)</a>
+        <a class="nav-tab" href="andri.html">2. iPhone + Pixel + 32 GB Mac</a>
+        <a class="nav-tab active" href="dev-flow.html">3. Þróunarflæði &amp; Tengingar</a>
+      </nav>
+
+      <span class="badge">Arkitektúr · Engar snúrur í fartölvu</span>
+      <h1>Þróunarflæði: 32 GB Mac + iPhone + Pixel við ljósleiðarainntak</h1>
+      <p class="subtitle">
+        Í stað þess að hafa tvo síma í USB-snúrum á fartölvunni stendur <strong>32 GB Mac mini</strong> í hillu
+        beint við ljósleiðarainntakið (tengdur með <strong>Cat6-netsnúru</strong> í aðalbeininn), og bæði
+        <strong>iPhone-síminn (16e/15)</strong> og <strong>Google Pixel-síminn (8a/8/9a)</strong> eru fasttengdir í USB-C á Mac-tölvunni.
+      </p>
+
+      <h2 class="section-title">1. Myndrænt tengirit</h2>
+      <div class="diagram-box">
+        <svg viewBox="0 0 960 475" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tengirit þróunarumhverfis">
+          <defs>
+            <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#10b981" />
+            </marker>
+            <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#3b82f6" />
+            </marker>
+            <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#f59e0b" />
+            </marker>
+          </defs>
+
+          <!-- Zone 1: Work anywhere -->
+          <rect x="15" y="25" width="245" height="260" rx="14" fill="#182028" stroke="#3b82f6" stroke-width="2" />
+          <text x="33" y="55" fill="#93c5fd" font-size="11" font-weight="700" letter-spacing="0.8">ÞRÁÐLAUS VINNUSTÖÐ</text>
+          <text x="33" y="82" fill="#ffffff" font-size="17" font-weight="800">💻 Linux-fartölva</text>
+          <text x="33" y="103" fill="#9ca3af" font-size="11.5">Engar USB-snúrur · Hvar sem er</text>
+
+          <rect x="31" y="122" width="213" height="42" rx="8" fill="#1e2934" stroke="#2a3644" />
+          <text x="43" y="141" fill="#f3f4f6" font-size="12" font-weight="700">Gervigreindarþjarkar (Agents)</text>
+          <text x="43" y="156" fill="#9ca3af" font-size="11">Skrifa kóða, keyra prófanir &amp; skoða UI</text>
+
+          <rect x="31" y="174" width="213" height="42" rx="8" fill="#1e2934" stroke="#2a3644" />
+          <text x="43" y="193" fill="#fde68a" font-size="12" font-family="monospace">mac-build &lt;repo&gt;</text>
+          <text x="43" y="208" fill="#9ca3af" font-size="11">rsync + ssh yfir á Mac (~0,1 sek)</text>
+
+          <rect x="31" y="226" width="213" height="42" rx="8" fill="#1e2934" stroke="#2a3644" />
+          <text x="43" y="245" fill="#fde68a" font-size="12" font-family="monospace">SSH-göng (127.0.0.1:5038)</text>
+          <text x="43" y="260" fill="#9ca3af" font-size="11">Öruggur aðgangur að báðum símum</text>
+
+          <!-- Wi-Fi Link from Laptop (x=260) to Router (x=395) -->
+          <text x="327" y="126" fill="#93c5fd" font-size="11.5" font-weight="700" text-anchor="middle">Staðbundið Wi-Fi 6</text>
+          <text x="327" y="142" fill="#9ca3af" font-size="10.5" text-anchor="middle">~2–4 ms · 500+ Mbps</text>
+          <line x1="272" y1="158" x2="383" y2="158" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arrow-blue)" marker-start="url(#arrow-blue)" />
+
+          <!-- Zone 2: Fiber Intake & Router -->
+          <rect x="395" y="85" width="175" height="145" rx="14" fill="#182028" stroke="#10b981" stroke-width="2" />
+          <text x="413" y="112" fill="#6ee7b7" font-size="11" font-weight="700" letter-spacing="0.8">LJÓSLEIÐARAINNTAK</text>
+          <text x="413" y="137" fill="#ffffff" font-size="15.5" font-weight="800">🌐 Aðalbeinir</text>
+          <text x="413" y="160" fill="#9ca3af" font-size="12">1000 Mbps ljósleiðari</text>
+          <text x="413" y="180" fill="#9ca3af" font-size="12">+ Tailscale-net</text>
+          <text x="413" y="205" fill="#6ee7b7" font-size="11" font-weight="600">Eitt Wi-Fi hopp í Mac!</text>
+
+          <!-- Cat6 Ethernet Link from Router (x=570) to Mac (x=695) -->
+          <text x="632" y="126" fill="#6ee7b7" font-size="11.5" font-weight="700" text-anchor="middle">Cat6-snúra</text>
+          <text x="632" y="142" fill="#9ca3af" font-size="10.5" text-anchor="middle">1 Gbps · 0,2 ms</text>
+          <line x1="582" y1="158" x2="683" y2="158" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-green)" marker-start="url(#arrow-green)" />
+
+          <!-- Zone 3: 32 GB Mac mini at Fiber Intake -->
+          <rect x="695" y="25" width="250" height="260" rx="14" fill="#182028" stroke="#10b981" stroke-width="2.5" />
+          <text x="713" y="55" fill="#6ee7b7" font-size="11" font-weight="700" letter-spacing="0.8">BYGGINGA- &amp; PRÓFUNARÞJÓNN</text>
+          <text x="713" y="82" fill="#ffffff" font-size="17" font-weight="800">🖥️ 32 GB Mac (M-series)</text>
+          <text x="713" y="103" fill="#9ca3af" font-size="11.5">Í hillu við ljósleiðarainntak (24/7)</text>
+
+          <rect x="713" y="122" width="214" height="42" rx="8" fill="#1e2934" stroke="#2a3644" />
+          <text x="725" y="141" fill="#f3f4f6" font-size="12" font-weight="700">Xcode + iOS Simulator + Rust</text>
+          <text x="725" y="156" fill="#9ca3af" font-size="11">Heitt DerivedData &amp; Cargo-skyndiminni</text>
+
+          <rect x="713" y="174" width="214" height="42" rx="8" fill="#1e2934" stroke="#2a3644" />
+          <text x="725" y="193" fill="#f3f4f6" font-size="12" font-weight="700">Android SDK + Gradle-þjónn</text>
+          <text x="725" y="208" fill="#9ca3af" font-size="11">Ekkert minnisálag á fartölvuna</text>
+
+          <rect x="713" y="226" width="214" height="42" rx="8" fill="#1e2934" stroke="#2a3644" />
+          <text x="725" y="245" fill="#f3f4f6" font-size="12" font-weight="700">GitHub Actions-keyrsluþjónar</text>
+          <text x="725" y="260" fill="#9ca3af" font-size="11">Keyrir CI fyrir lokuð repo (0 kr./mán)</text>
+
+          <!-- USB-C Wires to the Two Phones -->
+          <line x1="755" y1="285" x2="755" y2="342" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow-amber)" />
+          <text x="743" y="318" fill="#fcd34d" font-size="11" font-weight="700" text-anchor="end">USB-C #1</text>
+
+          <line x1="885" y1="285" x2="885" y2="342" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrow-amber)" />
+          <text x="897" y="318" fill="#fcd34d" font-size="11" font-weight="700" text-anchor="start">USB-C #2</text>
+
+          <!-- Phone 1: iPhone -->
+          <rect x="640" y="350" width="150" height="100" rx="12" fill="#182028" stroke="#f59e0b" stroke-width="2" />
+          <text x="654" y="378" fill="#ffffff" font-size="13.5" font-weight="800">🍎 iPhone 16e / 15</text>
+          <text x="654" y="398" fill="#6ee7b7" font-size="11" font-weight="600">80% hleðslumörk virk</text>
+          <text x="654" y="416" fill="#9ca3af" font-size="11">Xcode / XCUITest</text>
+          <text x="654" y="433" fill="#9ca3af" font-size="11">pymobiledevice3 &amp; devicectl</text>
+
+          <!-- Phone 2: Google Pixel -->
+          <rect x="805" y="350" width="140" height="100" rx="12" fill="#182028" stroke="#f59e0b" stroke-width="2" />
+          <text x="819" y="378" fill="#ffffff" font-size="13.5" font-weight="800">🤖 Pixel 8a / 8 / 9a</text>
+          <text x="819" y="398" fill="#6ee7b7" font-size="11" font-weight="600">80% hleðslumörk virk</text>
+          <text x="819" y="416" fill="#9ca3af" font-size="11">adb yfir SSH &amp; scrcpy</text>
+          <text x="819" y="433" fill="#9ca3af" font-size="11">uiautomator-prófanir</text>
+
+          <!-- Studio Mac box on bottom left -->
+          <rect x="15" y="340" width="585" height="110" rx="14" fill="#182028" stroke="#2a3644" stroke-width="1.5" />
+          <text x="35" y="368" fill="#fca5a5" font-size="11" font-weight="700" letter-spacing="0.8">SAMNÝTT STÚDÍÓ-TÖLVA (YFIR TAILSCALE)</text>
+          <text x="35" y="393" fill="#ffffff" font-size="15" font-weight="700">🎬 Stúdíó-Mac úti í bæ</text>
+          <text x="35" y="414" fill="#9ca3af" font-size="12">Keyrir OBS og upptökur í stúdíóinu + bakgrunns-CI byggingar á lægsta forgangi</text>
+          <text x="35" y="433" fill="#9ca3af" font-size="12">(ProcessType=Background) sem trufla aldrei útsendingar.</text>
+          <line x1="482" y1="230" x2="482" y2="340" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4,4" />
+        </svg>
+      </div>
+
+      <h2 class="section-title">2. Áætlaður hraði og svartími</h2>
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-label">Svartími (Fartölva &rarr; Mac)</div>
+          <div class="metric-val">~2–4 ms</div>
+          <p class="metric-sub">Bara eitt Wi-Fi hopp því Mac-þjónninn er á Cat6-snúru í beini.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Kóðasending (rsync)</div>
+          <div class="metric-val">~0,1 sek</div>
+          <p class="metric-sub">Sendir aðeins breyttar línur í <code>.swift</code>, <code>.rs</code> eða <code>.kt</code>.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Heit iOS / Rust þýðing</div>
+          <div class="metric-val">~5–12 sek</div>
+          <p class="metric-sub">Áætlað á heitu skyndiminni í stað 7–10 mínútna á köldum skýjaþjóni.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Skjámyndir úr símum</div>
+          <div class="metric-val">~0,5 sek</div>
+          <p class="metric-sub">Sóttar yfir SSH úr <code>pymobiledevice3</code> (iOS) og <code>adb</code> (Android).</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">3. Hvernig þetta virkar í daglegri vinnu</h2>
+      <div class="flow-grid">
+        <div class="flow-card highlight-blue">
+          <span class="flow-pill pill-blue">1. Engar snúrur í fartölvu</span>
+          <h3>Fullt frelsi með vinnuvélina</h3>
+          <p>
+            Fartölvan er 100% laus við USB-hubba og símasnúrur. Hægt er að vinna hvar sem er
+            og hafa samtímis fullan aðgang að 32 GB Mac-þjóninum og báðum prófunarsímunum.
+          </p>
+          <ul class="flow-list">
+            <li><strong>Ekkert minnisálag á fartölvu:</strong> Gradle, Rust og Xcode keyra á 32 GB Mac-þjóninum.</li>
+            <li><strong>Hljóðlaust:</strong> Mac mini og símarnir tveir liggja á vísum stað við ljósleiðarainntakið.</li>
+          </ul>
+        </div>
+
+        <div class="flow-card highlight-green">
+          <span class="flow-pill pill-green">2. iPhone-síminn í USB-C á Mac</span>
+          <h3>Bein Apple-verkfæri og skjámyndir</h3>
+          <p>
+            Þegar iPhone 16e/15 er tengdur beint við Mac mini sér Mac-þjónninn um samskiptin við símann (án skjáláss í prófunarham):
+          </p>
+          <ul class="flow-list">
+            <li><strong>Uppsetning og prófanir:</strong> <code>xcrun devicectl</code> og <code>XCUITest</code> setja upp og keyra UI-prófanir yfir USB-C.</li>
+            <li><strong>Skjámyndir og loggar:</strong> <code>pymobiledevice3</code> á Mac-tölvunni tekur skjámyndir (<code>dvt screenshot</code>) og les <code>oslog</code> sem fartölvan sækir yfir SSH.</li>
+          </ul>
+        </div>
+
+        <div class="flow-card highlight-purple">
+          <span class="flow-pill pill-purple">3. Pixel-síminn í USB-C á Mac</span>
+          <h3>Örugg <code>adb</code> SSH-göng af fartölvu</h3>
+          <p>
+            ADB-þjónninn á Mac-tölvunni hlustar aðeins á <code>127.0.0.1:5037</code> (aldrei opinn á staðarneti). Með föstum SSH-göngum af fartölvunni
+            halda öll verkfæri að Pixel-síminn sé tengdur beint við fartölvuna:
+          </p>
+          <ul class="flow-list">
+            <li><code>ssh -N -f -L 5038:127.0.0.1:5037 -L 27183:127.0.0.1:27183 &lt;mac-host&gt;</code></li>
+            <li><code>export ADB_SERVER_SOCKET=tcp:127.0.0.1:5038</code> &rarr; <code>adb</code> og <code>uiautomator</code> virka óbreytt.</li>
+            <li><code>scrcpy --tunnel-host=127.0.0.1 --tunnel-port=27183</code> opnar lifandi skjáglugga af Pixel-símanum.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <span>Tækninefnd · Þróunarflæði &amp; Arkitektúr (Október 2026)</span>
+        <a href="andri.html">&larr; Til baka á innkaupalistann</a>
+      </footer>
+    </div>
+  </body>
+</html>

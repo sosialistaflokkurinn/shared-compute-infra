@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iPhone, Google Pixel &amp; 32 GB Mac mini · Innkaupalisti</title>
+    <style>
+      :root {
+        --bg: #0f1419;
+        --card: #182028;
+        --card-alt: #1e2934;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --red: #dc2626;
+        --red-soft: rgba(220, 38, 38, 0.16);
+        --green: #10b981;
+        --green-soft: rgba(16, 185, 129, 0.14);
+        --blue: #3b82f6;
+        --blue-soft: rgba(59, 130, 246, 0.16);
+        --amber: #f59e0b;
+        --amber-soft: rgba(245, 158, 11, 0.14);
+        --border: #2a3644;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .top-nav {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .nav-tab {
+        display: inline-block;
+        padding: 0.45rem 0.95rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        background: var(--card);
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .nav-tab.active {
+        background: var(--red-soft);
+        color: #ffffff;
+        border-color: var(--red);
+      }
+      .nav-tab:hover {
+        color: #ffffff;
+        border-color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        background: var(--blue-soft);
+        color: #93c5fd;
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+        margin: 0.75rem 0 0.5rem;
+        line-height: 1.2;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 1.06rem;
+        margin: 0 0 2rem;
+        max-width: 780px;
+      }
+      .section-title {
+        font-size: 1.32rem;
+        margin: 2.5rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.45rem;
+      }
+      .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+        gap: 1rem;
+      }
+      .spec-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+      }
+      .spec-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+      }
+      .spec-value {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.4rem;
+      }
+      .spec-note {
+        font-size: 0.88rem;
+        color: var(--muted);
+        margin: 0;
+      }
+      .no-tag {
+        color: #fca5a5;
+        font-weight: 600;
+      }
+      .ok-tag {
+        color: #6ee7b7;
+        font-weight: 600;
+      }
+      .tier-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.15rem;
+      }
+      .tier-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .tier-card.featured {
+        border: 2px solid var(--green);
+        background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--card) 100%);
+      }
+      .tier-pill {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.22rem 0.65rem;
+        border-radius: 999px;
+        margin-bottom: 0.75rem;
+        width: fit-content;
+      }
+      .pill-best {
+        background: var(--green-soft);
+        color: #6ee7b7;
+      }
+      .pill-good {
+        background: var(--blue-soft);
+        color: #93c5fd;
+      }
+      .pill-power {
+        background: var(--amber-soft);
+        color: #fcd34d;
+      }
+      .tier-title {
+        font-size: 1.32rem;
+        font-weight: 700;
+        margin: 0 0 0.25rem;
+      }
+      .tier-chip {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 1rem;
+      }
+      .tier-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.25rem;
+        font-size: 0.92rem;
+      }
+      .tier-list li {
+        padding: 0.36rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .tier-list li:last-child {
+        border-bottom: 0;
+      }
+      .price-box {
+        background: var(--card-alt);
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+        margin-top: auto;
+      }
+      .price-usd {
+        font-size: 1.28rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+      .price-isk {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .alert-box {
+        background: linear-gradient(135deg, rgba(220, 38, 38, 0.18), rgba(24, 32, 40, 0.95));
+        border: 2px solid var(--red);
+        border-radius: 16px;
+        padding: 1.4rem 1.5rem;
+        margin-top: 2.25rem;
+      }
+      .alert-title {
+        font-size: 1.18rem;
+        font-weight: 800;
+        color: #fca5a5;
+        margin: 0 0 0.5rem;
+      }
+      .alert-box p {
+        margin: 0.4rem 0;
+        font-size: 0.94rem;
+      }
+      .alert-steps {
+        margin: 0.75rem 0 0;
+        padding-left: 1.25rem;
+        font-size: 0.92rem;
+      }
+      .alert-steps li {
+        margin-bottom: 0.55rem;
+      }
+      code {
+        background: rgba(0, 0, 0, 0.38);
+        padding: 0.15rem 0.4rem;
+        border-radius: 5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.85em;
+        color: #fde68a;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .info-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+      }
+      .info-card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      .info-card p {
+        margin: 0;
+        font-size: 0.91rem;
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      footer a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="top-nav">
+        <a class="nav-tab" href="./">1. Stúdíó-tölva (Fyrir stúdíó)</a>
+        <a class="nav-tab active" href="andri.html">2. iPhone + Pixel + 32 GB Mac</a>
+        <a class="nav-tab" href="dev-flow.html">3. Þróunarflæði &amp; Tengingar</a>
+      </nav>
+
+      <span class="badge">Þróunarumhverfi · iPhone, Google Pixel &amp; 32 GB Mac</span>
+      <h1>iPhone, Google Pixel &amp; 32 GB Mac fyrir þróunarumhverfi</h1>
+      <p class="subtitle">
+        Fyrir hraðvirka staðbundna iOS-, Rust- og Android-þýðingu og sjálfvirkar prófanir allan sólarhringinn
+        vantar okkur <strong>eina 32 GB Mac-tölvu (M2 Pro / M4 / M1–M2 Max)</strong> sem tengist með netsnúru við beininn,
+        ásamt tveimur sérhæfðum prófunarsímum (<strong>einum iPhone og einum Google Pixel</strong>) sem eru fasttengdir með USB-C í Mac-tölvuna.
+      </p>
+
+      <!-- SECTION 1: IPHONE -->
+      <h2 class="section-title">🍎 Hluti 1: iPhone-prófunarsími (fasttengdur í Mac-þjón 24/7)</h2>
+      <div class="spec-grid" style="margin-bottom: 1.25rem;">
+        <div class="spec-card">
+          <div class="spec-label">1. Tengi &amp; Rafhlaða</div>
+          <div class="spec-value">USB-C + 80% hleðslumörk</div>
+          <p class="spec-note">
+            Síminn verður í sambandi 24/7. Aðeins <strong>iPhone 15 og nýrri</strong> eru með USB-C og innbyggð <strong>80% hleðslumörk</strong> í vélbúnaði svo rafhlaðan þenjist ekki út. <span class="no-tag">Ekki Lightning-síma.</span>
+          </p>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">2. Símafyrirtæki</div>
+          <div class="spec-value">100% Unlocked</div>
+          <p class="spec-note">
+            Verður að segja <span class="ok-tag">„No SIM restrictions“</span> í Settings svo hægt sé að setja íslenskt eSIM (Nova/Síminn/Vodafone) í hann.
+          </p>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">3. Stýrikerfi &amp; Geymsla</div>
+          <div class="spec-value">iOS 18 / 26 · 128 GB</div>
+          <p class="spec-note">
+            Styður <code>pymobiledevice3</code> (á Mac-tölvunni), <code>xcrun devicectl</code> og <code>XCUITest</code> fyrir skjámyndir, logga og UI-prófanir.
+          </p>
+        </div>
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier-card featured">
+          <div>
+            <span class="tier-pill pill-best">Val 1 · Bestu kaupin í iPhone</span>
+            <h3 class="tier-title">Apple iPhone 16e (128 GB, Unlocked)</h3>
+            <div class="tier-chip">A18 örgjörvi · 8 GB RAM · USB-C</div>
+            <ul class="tier-list">
+              <li><strong>Af hverju þessi:</strong> Nýi A18 kubburinn og <strong>8 GB RAM</strong> (styður nýjustu iOS-útgáfur og Apple Intelligence).</li>
+              <li><strong>USB-C + 80% hleðslumörk:</strong> Hannaður til að geta legið í sambandi við Mac-þjóninn 24/7 án þess að skemma rafhlöðuna.</li>
+              <li><strong>Einföld hönnun:</strong> Ein myndavél að aftan og sterkbyggt hús fyrir prófunarhillu.</li>
+              <li><strong>Gott framboð á Swappa:</strong> Mikið úrval af Unlocked-eintökum með 95–100% rafhlöðuheilsu.</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$340–$390 (Swappa, okt. 2026)</div>
+            <div class="price-isk">~43.000–49.000 kr. fyrir VSK (Unlocked)</div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-good">Val 2 · Góður varakostur</span>
+            <h3 class="tier-title">Apple iPhone 15 (128 GB, Unlocked)</h3>
+            <div class="tier-chip">A16 Bionic · 6 GB RAM · USB-C · Dynamic Island</div>
+            <ul class="tier-list">
+              <li><strong>Af hverju þessi:</strong> Einnig með <strong>USB-C</strong> og <strong>80% hleðslumörk</strong> í Settings.</li>
+              <li><strong>Dynamic Island:</strong> Gott til að prófa efstu skjábrún (Safe Area insets) í SwiftUI-viðmóti.</li>
+              <li>Mikil sala og mikið framboð á Swappa og í Seattle (~159 Unlocked-eintök á skrá).</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$360–$420 (Swappa, okt. 2026)</div>
+            <div class="price-isk">~45.000–53.000 kr. fyrir VSK (Unlocked)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: GOOGLE PIXEL ANDROID DEV PHONE -->
+      <h2 class="section-title">🤖 Hluti 2: Google Pixel-prófunarsími (fasttengdur í Mac-þjón 24/7)</h2>
+      <p class="subtitle" style="margin-bottom: 1.25rem;">
+        Til að persónulegi síminn sé aldrei bundinn í snúru er langbest að hafa sérstakan <strong>Google Pixel-prófunarsíma</strong> fasttengdan í Mac-þjóninn.
+        Pixel keyrir hreint Android 15/16 frá Google, er með <strong>innbyggða 80% hleðsluvörn</strong> (<em>Charging optimization &rarr; Limit to 80%</em>)
+        og <strong>7 ára uppfærsluloforð (til 2030–2032)</strong>.
+      </p>
+
+      <div class="tier-grid">
+        <div class="tier-card featured">
+          <div>
+            <span class="tier-pill pill-best">Val 1 · Bestu kaupin í Android</span>
+            <h3 class="tier-title">Google Pixel 8a (128 GB, Unlocked)</h3>
+            <div class="tier-chip">Google Tensor G3 · 8 GB RAM · 120 Hz OLED · Uppfærslur til 2031</div>
+            <ul class="tier-list">
+              <li><strong>80% hleðslumörk + Battery Capacity %:</strong> Pixel 8a er fyrsti ódýri Pixel-síminn sem sýnir bæði <em>Battery capacity %</em> í Android 16 og stöðvar hleðslu <strong>við 80%</strong> þegar hann er í sambandi 24/7.</li>
+              <li><strong>Hreint Android:</strong> Ekkert aukaframleiðendaviðmót sem truflar <code>adb</code> eða <code>uiautomator</code>.</li>
+              <li><strong>Unlocked (Google Edition):</strong> Kaupa ólæsta útgáfu (ekki Verizon-útgáfu).</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$220–$265 (Swappa, okt. 2026)</div>
+            <div class="price-isk">~28.000–33.500 kr. fyrir VSK (Unlocked)</div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-good">Val 2 · Flaggskip á sama verði</span>
+            <h3 class="tier-title">Google Pixel 8 (128 GB, Unlocked)</h3>
+            <div class="tier-chip">Google Tensor G3 · 8 GB RAM · 6,2" 120 Hz · Uppfærslur til 2030</div>
+            <ul class="tier-list">
+              <li><strong>Sami Tensor G3 örgjörvi og 8 GB RAM</strong> í vönduðu gler- og álhúsi.</li>
+              <li>Styður einnig <strong>Limit to 80%</strong> hleðsluvörn í Android 15/16 og USB-C skjávörpun (DisplayPort alt-mode).</li>
+              <li>Kostar nánast það sama notaður á Swappa og Pixel 8a!</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$230–$275 (Swappa, okt. 2026)</div>
+            <div class="price-isk">~29.000–34.500 kr. fyrir VSK (Unlocked)</div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-power">Val 3 · Nýrri kynslóð með flötu baki</span>
+            <h3 class="tier-title">Google Pixel 9a (128 GB, Unlocked)</h3>
+            <div class="tier-chip">Google Tensor G4 · 8 GB RAM · 5100 mAh · Flatt bak</div>
+            <ul class="tier-list">
+              <li><strong>Pixel 9a er með alveg flatt bak</strong> (engin myndavélarönd sem stendur út!) svo hann liggur 100% stöðugur í prófunarhillu.</li>
+              <li>Nýrri Tensor G4 örgjörvi, stór 5100 mAh rafhlaða og uppfærslur til ársins <strong>2032</strong>.</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$305–$365 (Swappa, okt. 2026)</div>
+            <div class="price-isk">~38.500–46.000 kr. fyrir VSK (Unlocked)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: 32 GB MAC -->
+      <h2 class="section-title">🖥️ Hluti 3: 32 GB Mac (M-series) sem bygginga- og prófunarþjónn</h2>
+      <p class="subtitle" style="margin-bottom: 1.25rem;">
+        Þessi Mac-tölva stendur í skáp/hillu við ljósleiðarainntakið (tengd með Cat6-netsnúru í beininn, og bæði iPhone-síminn og Pixel-síminn eru í USB-C á henni).
+        Hún þýðir Rust-kjarnann og SwiftUI-kóðann á <strong>um 5–12 sekúndum</strong> (áætlað á heitu skyndiminni) í stað ~9 mínútna í skýinu, og keyrir iOS Simulator prófanir allan sólarhringinn.
+      </p>
+
+      <div class="tier-grid">
+        <div class="tier-card featured">
+          <div>
+            <span class="tier-pill pill-best">Val 1 · Besta verð/afköst í 32 GB</span>
+            <h3 class="tier-title">Mac mini M2 Pro (32 GB RAM)</h3>
+            <div class="tier-chip">10/12-kjarna M2 Pro · 32 GB Unified Memory · 512 GB–1 TB SSD</div>
+            <ul class="tier-list">
+              <li><strong>32 GB RAM:</strong> Keyrir Xcode, iOS Simulator, Rust <code>cargo</code> og Android Gradle samtímis án þess að blása.</li>
+              <li><strong>Tengi:</strong> 4× Thunderbolt 4, 2× USB-A (fyrir símana), HDMI, Gigabit Ethernet.</li>
+              <li><strong>Stærð:</strong> 19,7 × 19,7 × 3,6 cm (1,28 kg), afar auðvelt að senda í pakka eða taka í handfarangur.</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$950–$1.100 (Swappa / Craigslist)</div>
+            <div class="price-isk">~120.000–138.000 kr. fyrir VSK</div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-good">Val 2 · Nýjasta kynslóð í 24–32 GB</span>
+            <h3 class="tier-title">Mac mini M4 / M4 Pro (24–32 GB RAM)</h3>
+            <div class="tier-chip">10/12-kjarna M4 / M4 Pro · 24 GB eða 32 GB RAM · 512 GB+ SSD</div>
+            <ul class="tier-list">
+              <li><strong>Hraðasti einstaki kjarninn:</strong> M4 þýðir Swift og Rust hraðar en nokkur eldri kubbur.</li>
+              <li><strong>Ath.:</strong> M4 Pro kemur með <strong>24 GB RAM sem grunnstærð</strong> (sem dugar líka mjög vel) eða 32/48 GB.</li>
+              <li><strong>Stærð:</strong> Aðeins 12,7 × 12,7 cm og 0,68 kg.</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$830 (24 GB) til $1.250 (32 GB / M4 Pro)</div>
+            <div class="price-isk">~105.000–157.000 kr. fyrir VSK á Swappa / Back Market</div>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-power">Val 3 · 32–64 GB vinnustöð á góðu verði</span>
+            <h3 class="tier-title">Mac Studio M1 Max / M2 Max (32–64 GB)</h3>
+            <div class="tier-chip">10/12-kjarna Max · 32 GB eða 64 GB RAM · 512 GB–2 TB SSD</div>
+            <ul class="tier-list">
+              <li><strong>Allir Mac Studio koma með a.m.k. 32 GB RAM</strong> sem grunnstærð (enginn 8/16 GB flöskuháls).</li>
+              <li>400 GB/s minnisbandbreidd, 10Gb Ethernet og gríðarleg kæling fyrir 24/7 álag.</li>
+              <li>Oft á svipuðu verði notaðir á Seattle Craigslist og 32 GB Mac mini!</li>
+            </ul>
+          </div>
+          <div class="price-box">
+            <div class="price-usd">$1.100–$1.650 (Swappa / Craigslist)</div>
+            <div class="price-isk">~138.000–208.000 kr. fyrir VSK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MANDATORY VERIFICATION FOR ALL 3 -->
+      <div class="alert-box">
+        <div class="alert-title">⚠️ Gátlisti í Seattle áður en tækin eru greidd eða send til Íslands</div>
+        <p>
+          Hvar er best að kaupa? <strong>Swappa.com</strong> (þar sem starfsfólk sannreynir raðnúmer/IMEI gegn læsingum áður en auglýsing fer í loftið)
+          eða <strong>Seattle Craigslist</strong> (ef tækið er prófað á staðnum).
+        </p>
+        <ol class="alert-steps">
+          <li>
+            <strong>Á iPhone-símanum (16e eða 15):</strong>
+            <ul>
+              <li>Tengjast Wi-Fi í „Hello“ uppsetningu til að ganga úr skugga um að hann biðji <strong>ekki</strong> um Apple ID fyrri eiganda (<em>iPhone Locked to Owner</em>).</li>
+              <li>Opna <strong>Settings → General → About → Carrier Lock</strong> og staðfesta að þar standi <strong>„No SIM restrictions“</strong>.</li>
+              <li>Opna <strong>Settings → Battery → Battery Health</strong> (staðfesta 85–100% heilsu og kveikja strax á <strong>Charging → 80% Limit</strong>).</li>
+              <li>Fyrir sjálfvirkar prófanir í skáp: hafa <strong>Passcode = Off</strong>, <strong>Auto-Lock = Never</strong> og <strong>Automatic Updates = Off</strong>.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Á Google Pixel-símanum (8a, 8 eða 9a):</strong>
+            <ul>
+              <li>Kaupa <strong>Unlocked (Google Edition)</strong> (ekki Verizon-læstan) og ganga úr skugga um að hann biðji ekki um Google-reikning fyrri eiganda (<em>Factory Reset Protection / FRP</em>) eftir núllstillingu á Wi-Fi.</li>
+              <li>Opna <strong>Settings → Network &amp; internet → SIMs</strong> (staðfesta að hann sé ólæstur) og í <strong>Settings → System → Developer options</strong> (<em>eftir að síminn hefur tengst Wi-Fi</em>) má sjá að <strong>OEM unlocking</strong> er ekki gráað út (valkvætt; halda bootloader læstum).</li>
+              <li>Í <strong>Settings → Battery → Charging optimization</strong>: kveikja á <strong>Limit to 80%</strong>, og hafa kveikt á símanum (slökktur Pixel hleður í 100%).</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Á Mac-tölvunni (Mac mini / Mac Studio):</strong>
+            <ul>
+              <li>Tengjast Wi-Fi í „Hello“ uppsetningunni og fara alla leið inn á skjáborðið (það afhjúpar strax ef vélin er læst við gamalt Apple ID eða fyrirtækjalæsingu / MDM).</li>
+              <li>Opna <em>Terminal</em> á skjáborðinu (aðeins marktækt eftir að vélin hefur tengst Wi-Fi í skrefinu á undan) og keyra þessar tvær línur:
+                <br />
+                <code>system_profiler SPHardwareDataType | grep "Activation Lock"</code> &rarr; verður að segja <strong>Disabled</strong>
+                <br />
+                <code>profiles status -type enrollment</code> &rarr; verður að segja <strong>No</strong> á bæði DEP og MDM
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>📦 Sending til Íslands</h3>
+          <p>
+            Tölvur og símar bera <strong>0% toll</strong> á Íslandi (aðeins 24% VSK og umsýslugjald flutningsaðila).
+            Mikilvægt er að láta kaupkvittun af Swappa fylgja með í pakkanum svo tollafgreiðsla miðist við raunverulegt kaupverð notaðra tækja.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>⚡ Engar snúrur í fartölvunni</h3>
+          <p>
+            Með bæði <strong>Google Pixel</strong> og <strong>iPhone 16e/15</strong> fasttengda við 32 GB Mac-þjóninn við ljósleiðarainntakið
+            getur fartölvan keyrt prófanir þráðlaust á báðum kerfum hlið við hlið.
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        <span>Tækninefnd · Innkaupalisti í Seattle (Október 2026)</span>
+        <a href="dev-flow.html">Sjá næst: 3. Þróunarflæði &amp; Tengingar &rarr;</a>
+      </footer>
+    </div>
+  </body>
+</html>
