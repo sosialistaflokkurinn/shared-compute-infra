@@ -221,6 +221,30 @@
         min-width: 660px;
         display: block;
       }
+      .alert-box {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(24, 32, 40, 0.95));
+        border: 2px solid var(--amber);
+        border-radius: 16px;
+        padding: 1.35rem 1.5rem;
+        margin-top: 2rem;
+      }
+      .alert-title {
+        font-size: 1.12rem;
+        font-weight: 800;
+        color: #fcd34d;
+        margin: 0 0 0.45rem;
+      }
+      .alert-box p, .alert-box li {
+        font-size: 0.92rem;
+        color: var(--text);
+      }
+      .alert-box ul {
+        margin: 0.5rem 0 0;
+        padding-left: 1.25rem;
+      }
+      .alert-box li {
+        margin-bottom: 0.35rem;
+      }
       .info-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -271,12 +295,12 @@
       <span class="badge">Flutningur &amp; Rummál · Lengd × Breidd × Hæð</span>
       <h1>Áætluð stærð og þyngd pakka eftir vöruvali</h1>
       <p class="subtitle">
-        Nákvæm mál (lengd × breidd × hæð í cm og tommum) og þyngd á hverju tæki fyrir sig, ásamt þremur líklegum útgáfum
+        Nákvæm mál (lengd × breidd × hæð í cm og tommum) og þyngd á hverju tæki fyrir sig, ásamt þremur útgáfum
         af <strong>heildarpakkasendingu (2× Mac + iPhone + Pixel)</strong> í einum kassa eða í handfarangurstösku.
       </p>
 
       <!-- SECTION 1: INDIVIDUAL DEVICE DIMENSIONS -->
-      <h2 class="section-title">1. Stærð og þyngd hvers tækis (án og með bólstrun/öskju)</h2>
+      <h2 class="section-title">1. Stærð og þyngd hvers tækis (án og með bólstrun)</h2>
       <div class="dim-table-wrap">
         <table>
           <thead>
@@ -284,7 +308,7 @@
               <th>Tæki / Tegund</th>
               <th>Stærð tækis (L × B × H)</th>
               <th>Þyngd tækis</th>
-              <th>Með 2 cm bólstrun / öskju</th>
+              <th>Með 2 cm loftbóluplasti</th>
               <th>Þyngd m/snúru &amp; umbúðum</th>
             </tr>
           </thead>
@@ -307,21 +331,21 @@
               <td><strong>🎬 Mac Studio M1/M2 Max</strong></td>
               <td>19,7 × 19,7 × 9,5 cm <span style="color:var(--muted);">(7,75" × 7,75" × 3,7")</span></td>
               <td>2,70 kg <span style="color:var(--muted);">(5,9 lb)</span></td>
-              <td>~24,0 × 24,0 × 14,0 cm</td>
+              <td>~24,0 × 24,0 × 13,5 cm</td>
               <td>~3,25 kg <span style="color:var(--muted);">(7,2 lb)</span></td>
             </tr>
             <tr>
               <td><strong>🍎 Apple iPhone 16e / 15</strong></td>
               <td class="dim-highlight">14,7 × 7,2 × 0,78 cm <span style="color:var(--muted);font-weight:400;">(5,8" × 2,8" × 0,31")</span></td>
               <td>0,17 kg <span style="color:var(--muted);">(6,0 oz)</span></td>
-              <td>~17,5 × 9,5 × 3,0 cm</td>
+              <td>~18,0 × 10,0 × 3,0 cm</td>
               <td>~0,30 kg <span style="color:var(--muted);">(0,66 lb)</span></td>
             </tr>
             <tr>
               <td><strong>🤖 Google Pixel 8a / 8 / 9a</strong></td>
               <td class="dim-highlight">15,2 × 7,3 × 0,89 cm <span style="color:var(--muted);font-weight:400;">(6,0" × 2,9" × 0,35")</span></td>
               <td>0,19 kg <span style="color:var(--muted);">(6,6 oz)</span></td>
-              <td>~18,0 × 9,5 × 3,0 cm</td>
+              <td>~18,0 × 10,0 × 3,0 cm</td>
               <td>~0,32 kg <span style="color:var(--muted);">(0,70 lb)</span></td>
             </tr>
           </tbody>
@@ -329,34 +353,35 @@
       </div>
 
       <!-- SECTION 2: VISUAL BOX LAYOUT SVG -->
-      <h2 class="section-title">2. Myndrænt skipulag á líklegustu heildarsendingunni (USPS Large Flat Rate Box)</h2>
+      <h2 class="section-title">2. Myndrænt skipulag í 12" × 12" × 6" kassa (t.d. USPS Large Flat Rate Box)</h2>
       <p class="subtitle" style="margin-bottom: 1rem;">
-        Öruggasti og hagkvæmasti kassinn hjá bandaríska póstinum (<strong>USPS Priority Mail International Large Flat Rate Box</strong>, ókeypis kassi á pósthúsi)
-        er <strong>30,5 × 30,0 × 14,0 cm að innanmáli</strong> (12" × 11,75" × 5,5") og leyfir allt að <strong>9,0 kg (20 lbs)</strong> fyrir fast verð (<strong>~$75,15</strong>).
-        Hann rúmar <strong>báðar Mac-tölvurnar + báða símana + rafmagnssnúrur</strong> með ríflegri loftbóluplastvörn allan hringinn:
+        Staðlaður 12" × 12" × 6" póstkassi (t.d. <strong>USPS Large Flat Rate Box</strong>, ókeypis kassi á pósthúsi)
+        er <strong>30,5 × 29,8 × 14,0 cm að innanmáli</strong> (12,0" × 11,75" × 5,5").
+        Þar komast <strong>tvær Mac mini M2 Pro staflaðar (3,6 + 3,6 = 7,2 cm hæð)</strong> (eða <strong>tvær M4 hlið við hlið, 5,0 cm hæð</strong>)
+        ásamt báðum símunum (standandi á rönd í loftbóluumslögum, 3 cm þykkir hvor) með 2,5–3,5 cm bólstrun allan hringinn:
       </p>
 
       <div class="diagram-box">
-        <svg viewBox="0 0 920 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pökkun í USPS Large Flat Rate kassa">
-          <!-- Left: Top-down view (30.5 x 30.0 cm) -->
-          <text x="230" y="28" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">Ofan frá (Breidd 30,5 cm × Dýpt 30,0 cm)</text>
+        <svg viewBox="0 0 920 365" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pökkun í 30,5 x 29,8 x 14,0 cm kassa">
+          <!-- Left: Top-down view (30.5 x 29.8 cm inside) -->
+          <text x="230" y="28" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">Ofan frá (Innanmál: 30,5 × 29,8 cm)</text>
           <rect x="65" y="45" width="330" height="275" rx="10" fill="#182028" stroke="#f59e0b" stroke-width="2.5" />
           <!-- Inner padding dashed border -->
           <rect x="85" y="65" width="290" height="235" rx="6" fill="#121820" stroke="#4b5563" stroke-dasharray="5,5" />
-          <text x="230" y="59" fill="#fcd34d" font-size="10.5" font-weight="600" text-anchor="middle">2–3 cm loftbóluplast (bubble wrap) við allar hliðar</text>
+          <text x="230" y="59" fill="#fcd34d" font-size="10.5" font-weight="600" text-anchor="middle">2,5–3 cm loftbóluplast við allar hliðar</text>
 
           <!-- Mac mini footprint inside -->
-          <rect x="102" y="80" width="175" height="175" rx="10" fill="#1e2934" stroke="#10b981" stroke-width="2" />
-          <text x="190" y="145" fill="#6ee7b7" font-size="13" font-weight="800" text-anchor="middle">2× Mac mini staflaðar</text>
-          <text x="190" y="166" fill="#f3f4f6" font-size="11.5" text-anchor="middle">(19,7 × 19,7 cm hvor</text>
-          <text x="190" y="183" fill="#9ca3af" font-size="11" text-anchor="middle">eða 12,7 × 12,7 cm M4)</text>
-          <text x="190" y="205" fill="#6ee7b7" font-size="10.5" text-anchor="middle">Pappaspjald á milli</text>
+          <rect x="100" y="80" width="180" height="175" rx="10" fill="#1e2934" stroke="#10b981" stroke-width="2" />
+          <text x="190" y="138" fill="#6ee7b7" font-size="12.5" font-weight="800" text-anchor="middle">2× Mac mini M2 Pro</text>
+          <text x="190" y="158" fill="#f3f4f6" font-size="11.2" text-anchor="middle">staflaðar (19,7 × 19,7 cm)</text>
+          <text x="190" y="182" fill="#9ca3af" font-size="10.8" text-anchor="middle">eða 2× M4 (12,7 cm) hlið við hlið</text>
+          <text x="190" y="206" fill="#6ee7b7" font-size="10.5" text-anchor="middle">1,8 cm bólstrun á milli</text>
 
-          <!-- Phones + cables compartment on right side of box -->
+          <!-- Phones standing on edge + cables on right side of box -->
           <rect x="290" y="80" width="72" height="105" rx="8" fill="#1e2934" stroke="#3b82f6" stroke-width="2" />
-          <text x="326" y="118" fill="#93c5fd" font-size="11.5" font-weight="700" text-anchor="middle">🍎 iPhone</text>
-          <text x="326" y="136" fill="#93c5fd" font-size="11.5" font-weight="700" text-anchor="middle">🤖 Pixel</text>
-          <text x="326" y="155" fill="#9ca3af" font-size="10" text-anchor="middle">15 × 7,5 cm</text>
+          <text x="326" y="114" fill="#93c5fd" font-size="11" font-weight="700" text-anchor="middle">🍎 iPhone</text>
+          <text x="326" y="132" fill="#93c5fd" font-size="11" font-weight="700" text-anchor="middle">🤖 Pixel</text>
+          <text x="326" y="150" fill="#9ca3af" font-size="9.5" text-anchor="middle">á rönd (6 cm)</text>
 
           <rect x="290" y="195" width="72" height="60" rx="8" fill="#1e2934" stroke="#9ca3af" stroke-width="1.5" />
           <text x="326" y="222" fill="#f3f4f6" font-size="11" font-weight="700" text-anchor="middle">Snúrur</text>
@@ -364,36 +389,37 @@
 
           <!-- Dimension labels for left box -->
           <text x="230" y="342" fill="#fcd34d" font-size="12" font-weight="700" text-anchor="middle">&larr; Utanmál lengd: 31,1 cm (12,25") &rarr;</text>
-          <text x="30" y="185" fill="#fcd34d" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-90 30 185)">Breidd: 30,5 cm (12,0")</text>
+          <text x="30" y="185" fill="#fcd34d" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-90 30 185)">Utanmál breidd: 30,5 cm (12,0")</text>
 
           <!-- Right: Side view (Height 15.2 cm outside / 14.0 cm inside) -->
-          <text x="685" y="28" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">Frá hlið (Hæð 15,2 cm utan / 14,0 cm innan)</text>
-          <rect x="490" y="95" width="385" height="175" rx="10" fill="#182028" stroke="#f59e0b" stroke-width="2.5" />
+          <text x="685" y="28" fill="#ffffff" font-size="15" font-weight="800" text-anchor="middle">Frá hlið (Innanmál hæð: 14,0 cm / Utanmál: 15,2 cm)</text>
+          <rect x="490" y="90" width="385" height="182" rx="10" fill="#182028" stroke="#f59e0b" stroke-width="2.5" />
 
-          <!-- Bottom foam -->
-          <rect x="505" y="242" width="355" height="18" rx="4" fill="#2a3644" />
-          <text x="682" y="255" fill="#9ca3af" font-size="10" text-anchor="middle">2 cm bólstrun í botni</text>
+          <!-- Bottom foam (2.5 cm) -->
+          <rect x="505" y="244" width="355" height="20" rx="4" fill="#2a3644" />
+          <text x="682" y="258" fill="#9ca3af" font-size="10" text-anchor="middle">2,5 cm bólstrun í botni</text>
 
-          <!-- Mac #1 (bottom) -->
-          <rect x="515" y="190" width="235" height="46" rx="6" fill="#1e2934" stroke="#10b981" stroke-width="2" />
-          <text x="632" y="217" fill="#ffffff" font-size="11.2" font-weight="700" text-anchor="middle">🖥️ Mac #1 (Stúdíó): 3,6–5,0 cm</text>
+          <!-- Mac #1 (bottom, 3.6 cm) -->
+          <rect x="515" y="196" width="235" height="42" rx="6" fill="#1e2934" stroke="#10b981" stroke-width="2" />
+          <text x="632" y="221" fill="#ffffff" font-size="11.2" font-weight="700" text-anchor="middle">🖥️ Mac #1 (M2 Pro): hæð 3,6 cm</text>
 
-          <!-- Middle foam + Mac #2 (top) -->
-          <rect x="515" y="132" width="235" height="46" rx="6" fill="#1e2934" stroke="#10b981" stroke-width="2" />
-          <text x="632" y="159" fill="#ffffff" font-size="11.2" font-weight="700" text-anchor="middle">🖥️ Mac #2 (32 GB): 3,6–5,0 cm</text>
+          <!-- 1.8 cm middle foam + Mac #2 (top, 3.6 cm) -->
+          <rect x="515" y="132" width="235" height="42" rx="6" fill="#1e2934" stroke="#10b981" stroke-width="2" />
+          <text x="632" y="157" fill="#ffffff" font-size="11.2" font-weight="700" text-anchor="middle">🖥️ Mac #2 (M2 Pro): hæð 3,6 cm</text>
+          <text x="632" y="188" fill="#6ee7b7" font-size="9.5" text-anchor="middle">1,8 cm millibólstrun</text>
 
-          <!-- Phones standing padded on the right -->
-          <rect x="760" y="132" width="95" height="104" rx="6" fill="#1e2934" stroke="#3b82f6" stroke-width="2" />
+          <!-- Phones standing padded on the right (10 cm tall on edge) -->
+          <rect x="760" y="132" width="95" height="106" rx="6" fill="#1e2934" stroke="#3b82f6" stroke-width="2" />
           <text x="807" y="175" fill="#93c5fd" font-size="11.5" font-weight="700" text-anchor="middle">🍎 iPhone +</text>
           <text x="807" y="193" fill="#93c5fd" font-size="11.5" font-weight="700" text-anchor="middle">🤖 Pixel</text>
-          <text x="807" y="212" fill="#9ca3af" font-size="9.5" text-anchor="middle">í loftbóluumslögum</text>
+          <text x="807" y="212" fill="#9ca3af" font-size="9.5" text-anchor="middle">hæð á rönd: 10 cm</text>
 
-          <!-- Top foam -->
-          <rect x="505" y="105" width="355" height="18" rx="4" fill="#2a3644" />
-          <text x="682" y="118" fill="#9ca3af" font-size="10" text-anchor="middle">2 cm bólstrun efst</text>
+          <!-- Top foam (2.5 cm) -->
+          <rect x="505" y="100" width="355" height="20" rx="4" fill="#2a3644" />
+          <text x="682" y="114" fill="#9ca3af" font-size="10" text-anchor="middle">2,5 cm bólstrun efst</text>
 
-          <text x="685" y="295" fill="#6ee7b7" font-size="12.5" font-weight="700" text-anchor="middle">Heildarhæð tveggja Mac mini (7,2–10 cm) passar auðveldlega í 14 cm hæð!</text>
-          <text x="685" y="316" fill="#9ca3af" font-size="11.5" text-anchor="middle">Heildarþyngd pakka: ~3,4–4,2 kg (7,5–9,2 lbs) af leyfilegum 9,0 kg (20 lbs)</text>
+          <text x="685" y="296" fill="#6ee7b7" font-size="12" font-weight="700" text-anchor="middle">Samtals hæð: 2,5 + 3,6 + 1,8 + 3,6 + 2,5 = 14,0 cm (eða 2× M4 hlið við hlið = 5,0 cm hæð)</text>
+          <text x="685" y="317" fill="#9ca3af" font-size="11.5" text-anchor="middle">Heildarþyngd pakka: ~3,4–4,2 kg (7,5–9,2 lbs) af leyfilegum 9,0 kg (20 lbs)</text>
         </svg>
       </div>
 
@@ -404,17 +430,17 @@
           <div>
             <span class="tier-pill pill-good">Útgáfa A · Minnsta og léttasta sendingin</span>
             <h3 class="tier-title">2× Mac mini M4 + iPhone + Pixel</h3>
-            <div class="tier-chip">Tvær nýju 12,7 × 12,7 cm M4 vélarnar + 2 símar</div>
+            <div class="tier-chip">Tvær 12,7 × 12,7 × 5,0 cm M4 vélar hlið við hlið + 2 símar</div>
             <ul class="tier-list">
               <li><strong>Innihald:</strong> 1× Mac mini M4 (stúdíó) + 1× Mac mini M4/M4 Pro (þjónn) + iPhone 16e/15 + Pixel 8a/9a.</li>
+              <li><strong>Röðun:</strong> Báðar M4-vélarnar liggja <strong>hlið við hlið</strong> (<code>12,7 + 12,7 = 25,4 cm</code>), svo hæð tækjanna er aðeins <strong>5,0 cm</strong>!</li>
               <li><strong>Þyngd tækja:</strong> 1,40 kg (2× Mac) + 0,36 kg (2× símar) = <strong>1,76 kg</strong>.</li>
               <li><strong>Heildarþyngd m/kassa &amp; snúrum:</strong> <strong>~2,7 kg (6,0 lbs)</strong>.</li>
-              <li><strong>Passar í:</strong> <em>USPS Medium Flat Rate Box #1</em> (kostar <strong>$61,80</strong> í pósti) eða litla bakpokatösku!</li>
             </ul>
           </div>
           <div class="box-summary">
-            <div class="box-size">28,6 × 22,2 × 15,2 cm</div>
-            <div class="box-sub">11,25" × 8,75" × 6,0" (USPS Medium Box) · ~2,7 kg</div>
+            <div class="box-size">31,1 × 30,5 × 15,2 cm</div>
+            <div class="box-sub">12,25" × 12,0" × 6,0" (USPS Large Box / PirateShip) · ~2,7 kg</div>
           </div>
         </div>
 
@@ -424,15 +450,15 @@
             <h3 class="tier-title">2× Mac mini M2 Pro (eða 1× M2 Pro + 1× M4) + 2 símar</h3>
             <div class="tier-chip">32 GB M2 Pro + stúdíó-Mac mini + iPhone + Pixel</div>
             <ul class="tier-list">
-              <li><strong>Innihald:</strong> 2× Mac mini (allt að 19,7 × 19,7 × 3,6 cm hvor) + iPhone 16e/15 + Pixel 8a/8/9a + snúrur.</li>
+              <li><strong>Innihald:</strong> 2× Mac mini (staflaðar: <code>3,6 + 3,6 = 7,2 cm</code> eða <code>3,6 + 5,0 = 8,6 cm</code> á hæð) + iPhone 16e/15 + Pixel 8a/8/9a + snúrur.</li>
               <li><strong>Þyngd tækja:</strong> 1,95–2,56 kg (2× Mac) + 0,36 kg (2× símar) = <strong>2,3–2,9 kg</strong>.</li>
               <li><strong>Heildarþyngd m/kassa &amp; bólstrun:</strong> <strong>~3,5–4,1 kg (7,7–9,0 lbs)</strong>.</li>
-              <li><strong>Passar í:</strong> <em>USPS Large Flat Rate Box</em> (ókeypis kassi á pósthúsi, fast verð <strong>$75,15</strong> til Íslands, 6–10 dagar).</li>
+              <li><strong>Kassi:</strong> 12" × 12" × 6" kassi (USPS Large Flat Rate Box eða UPS/DHL í gegnum <em>PirateShip.com</em>, ~$70–$95 til Íslands).</li>
             </ul>
           </div>
           <div class="box-summary">
             <div class="box-size">31,1 × 30,5 × 15,2 cm</div>
-            <div class="box-sub">12,25" × 12,0" × 6,0" (USPS Large Box) · ~3,8 kg</div>
+            <div class="box-sub">12,25" × 12,0" × 6,0" kassi · ~3,8 kg (8,4 lbs)</div>
           </div>
         </div>
 
@@ -443,9 +469,9 @@
             <div class="tier-chip">Mac Studio (9,5 cm hár, 2,7 kg) + Mac mini + 2 símar</div>
             <ul class="tier-list">
               <li><strong>Innihald:</strong> 1× Mac Studio (19,7 × 19,7 × 9,5 cm) + 1× Mac mini + iPhone + Pixel.</li>
-              <li><strong>Af hverju sérkassi:</strong> Mac Studio (9,5 cm) + Mac mini (3,6–5 cm) eru 13,1–14,5 cm á hæð saman, svo betra er að leggja þær <strong>hlið við hlið</strong> í 45 × 26 × 18 cm kassa.</li>
+              <li><strong>Af hverju sérkassi:</strong> Mac Studio (9,5 cm) + Mac mini (3,6–5 cm) eru of háar til að stafla í 14 cm kassa, svo þær liggja <strong>hlið við hlið</strong> í 45 × 26 × 18 cm kassa.</li>
               <li><strong>Heildarþyngd m/kassa &amp; bólstrun:</strong> <strong>~5,2–5,8 kg (11,5–12,8 lbs)</strong>.</li>
-              <li><strong>Sending:</strong> USPS Priority Mail International eftir þyngd (~13 lbs til Íslands, <strong>~$95–$110</strong>).</li>
+              <li><strong>Sending:</strong> Pakki eftir þyngd (~12–13 lbs til Íslands í gegnum PirateShip / USPS / UPS, <strong>~$90–$115</strong>).</li>
             </ul>
           </div>
           <div class="box-summary">
@@ -453,6 +479,22 @@
             <div class="box-sub">18" × 10" × 7" eigin kassi · ~5,5 kg (12,1 lbs)</div>
           </div>
         </div>
+      </div>
+
+      <!-- BATTERY & CARRIER RULES -->
+      <div class="alert-box">
+        <div class="alert-title">🔋 Mikilvæg regla um Li-ion rafhlöður í alþjóðlegri póstsendingu (UN3481)</div>
+        <ul>
+          <li>
+            <strong>Mac mini og Mac Studio eru EKKI með neina Li-ion hleðslurafhlöðu</strong> (eingöngu borðtölvur í rafmagn) og mega því fara í hvaða póstsendingu sem er án takmarkana.
+          </li>
+          <li>
+            <strong>Símar með innbyggðri Li-ion rafhlöðu (iPhone og Pixel):</strong> Alþjóðlegar flugpóstreglur (<em>UN3481 PI967 Section II</em>) leyfa <strong>að hámarki 2 tæki með innbyggðri Li-ion rafhlöðu í sama kassa</strong> (slökkt á báðum símum og ~30–50% hleðsla).
+          </li>
+          <li>
+            <strong>Besti flutningsmáti:</strong> Kaupa sendingarmiða á netinu í gegnum <strong>PirateShip.com</strong> (UPS Worldwide Saver / DHL Express / USPS á 30–50% afslætti) þar sem <em>UN3481 (Lithium ion batteries contained in equipment, max 2 devices)</em> er hakað við, <strong>eða</strong> kippa símunum tveimur (sem vega bara 360 g saman!) með í handfarangri í flugi.
+          </li>
+        </ul>
       </div>
 
       <div class="info-grid">
