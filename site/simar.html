@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Símar á markaði · iPhone</title>
+    <style>
+      :root {
+        --bg: #0f1419;
+        --card: #182028;
+        --card-alt: #1e2934;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --red: #dc2626;
+        --red-soft: rgba(220, 38, 38, 0.16);
+        --green: #10b981;
+        --green-soft: rgba(16, 185, 129, 0.14);
+        --blue: #3b82f6;
+        --blue-soft: rgba(59, 130, 246, 0.16);
+        --amber: #f59e0b;
+        --amber-soft: rgba(245, 158, 11, 0.14);
+        --border: #2a3644;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .top-nav {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .nav-tab {
+        display: inline-block;
+        padding: 0.45rem 0.95rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        background: var(--card);
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .nav-tab.active {
+        background: var(--red-soft);
+        color: #ffffff;
+        border-color: var(--red);
+      }
+      .nav-tab:hover {
+        color: #ffffff;
+        border-color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        background: var(--amber-soft);
+        color: #fcd34d;
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+        margin: 0.75rem 0 0.5rem;
+        line-height: 1.2;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 1.06rem;
+        margin: 0 0 2rem;
+        max-width: 800px;
+      }
+      .section-title {
+        font-size: 1.32rem;
+        margin: 2.5rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.45rem;
+      }
+      .dim-table-wrap {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow-x: auto;
+        margin-bottom: 2rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+        min-width: 660px;
+      }
+      th, td {
+        padding: 0.85rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        background: var(--card-alt);
+        color: var(--muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      .dim-highlight {
+        color: #6ee7b7;
+        font-weight: 700;
+      }
+      .tier-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.15rem;
+      }
+      .tier-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .tier-card.featured {
+        border: 2px solid var(--green);
+        background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--card) 100%);
+      }
+      .tier-pill {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.22rem 0.65rem;
+        border-radius: 999px;
+        margin-bottom: 0.75rem;
+        width: fit-content;
+      }
+      .pill-best {
+        background: var(--green-soft);
+        color: #6ee7b7;
+      }
+      .pill-good {
+        background: var(--blue-soft);
+        color: #93c5fd;
+      }
+      .pill-power {
+        background: var(--amber-soft);
+        color: #fcd34d;
+      }
+      .tier-title {
+        font-size: 1.28rem;
+        font-weight: 700;
+        margin: 0 0 0.25rem;
+      }
+      .tier-chip {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .tier-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.25rem;
+        font-size: 0.91rem;
+      }
+      .tier-list li {
+        padding: 0.36rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .tier-list li:last-child {
+        border-bottom: 0;
+      }
+      .box-summary {
+        background: var(--card-alt);
+        border-radius: 10px;
+        padding: 0.9rem 1rem;
+        margin-top: auto;
+      }
+      .box-size {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+      .box-sub {
+        font-size: 0.84rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+      .diagram-box {
+        background: #121820;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1.5rem;
+        margin: 1.5rem 0 2rem;
+        overflow-x: auto;
+      }
+      .diagram-box svg {
+        width: 100%;
+        height: auto;
+        min-width: 660px;
+        display: block;
+      }
+      .alert-box {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(24, 32, 40, 0.95));
+        border: 2px solid var(--amber);
+        border-radius: 16px;
+        padding: 1.35rem 1.5rem;
+        margin-top: 2rem;
+      }
+      .alert-title {
+        font-size: 1.12rem;
+        font-weight: 800;
+        color: #fcd34d;
+        margin: 0 0 0.45rem;
+      }
+      .alert-box p, .alert-box li {
+        font-size: 0.92rem;
+        color: var(--text);
+      }
+      .alert-box ul {
+        margin: 0.5rem 0 0;
+        padding-left: 1.25rem;
+      }
+      .alert-box li {
+        margin-bottom: 0.35rem;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .info-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+      }
+      .info-card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      .info-card p {
+        margin: 0;
+        font-size: 0.91rem;
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      footer a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+      .buy-link {
+        display: block;
+        color: #93c5fd;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.2rem 0;
+      }
+      .buy-link:hover,
+      td a,
+      .info-card h3 a {
+        color: #93c5fd;
+      }
+      code {
+        background: var(--card-alt);
+        padding: 0.1rem 0.35rem;
+        border-radius: 6px;
+        font-size: 0.85em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="top-nav">
+        <a class="nav-tab" href="./">1. Stúdíó-tölva (Fyrir stúdíó)</a>
+        <a class="nav-tab" href="andri.html">2. iPhone + Pixel + 32 GB Mac</a>
+        <a class="nav-tab" href="dev-flow.html">3. Þróunarflæði &amp; Tengingar</a>
+        <a class="nav-tab" href="shipping.html">4. Stærðir &amp; Pakkasending</a>
+        <a class="nav-tab" href="markadur.html">5. Vélar á markaði núna</a>
+        <a class="nav-tab active" href="simar.html">6. Símar á markaði</a>
+      </nav>
+
+      <span class="badge">Hver hlekkur opnaður og staðfestur 24. október 2026</span>
+      <h1>Símar á markaði núna: iPhone 16e og iPhone 15</h1>
+      <p class="subtitle">
+        Krafan á síðu 2 er <strong>iPhone 15 eða nýrri</strong> (USB-C og 80% hleðslumörk), engir Lightning-símar.
+        Hér eru ólæstir (Unlocked) 128 GB símar sem eru til sölu núna á Swappa (sendir innan Bandaríkjanna).
+        Allir hlekkir voru opnaðir í vafra og verð, ástand og rafhlaða borin saman við auglýsinguna. Auglýsingar seljast
+        hratt, svo opnið hlekkinn áður en ákveðið er. Verð eru í Bandaríkjadölum, án skatts; krónuverð er reiknað á
+        kortagengi 122,79 kr. (sjá Epli-kaflann). Pixel bætist við á þessa síðu síðar.
+      </p>
+
+      <h2 class="section-title">Meðmæli</h2>
+      <div class="tier-grid">
+        <div class="tier-card featured">
+          <div>
+            <span class="tier-pill pill-best">Mest fyrir peninginn</span>
+            <div class="tier-title">iPhone 16e</div>
+            <div class="tier-chip">A18 · 8 GB · 128 GB · 2025</div>
+            <ul class="tier-list">
+              <li><strong>$375</strong>, Garland TX, rafhlaða 100%, ástand „Fair“</li>
+              <li><strong>$393</strong>, Oldsmar FL, rafhlaða 100%, „Good“, 30 daga ábyrgð</li>
+              <li>Kostar notaður nánast það sama og iPhone 15, en með nýrri örgjörva og meira minni</li>
+            </ul>
+          </div>
+          <div class="box-summary">
+            <a class="buy-link" href="https://swappa.com/listing/view/LAKN32922" target="_blank" rel="noopener">LAKN32922 · $375</a>
+            <a class="buy-link" href="https://swappa.com/listing/view/LAKS03872" target="_blank" rel="noopener">LAKS03872 · $393</a>
+          </div>
+        </div>
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-good">Ódýrastur</span>
+            <div class="tier-title">iPhone 15</div>
+            <div class="tier-chip">A16 · 6 GB · 128 GB · Dynamic Island · 2023</div>
+            <ul class="tier-list">
+              <li><strong>$355</strong>, Sioux Falls SD, rafhlaða 85%, „Fair“, 1 árs ábyrgð</li>
+              <li><strong>$388</strong>, Oldsmar FL, rafhlaða 90%, „Good“</li>
+              <li>Um $20 ódýrari en ódýrasti 16e, en rafhlaðan er jafnan slitnari</li>
+            </ul>
+          </div>
+          <div class="box-summary">
+            <a class="buy-link" href="https://swappa.com/listing/view/LALK17022" target="_blank" rel="noopener">LALK17022 · $355</a>
+            <a class="buy-link" href="https://swappa.com/listing/view/LALG09789" target="_blank" rel="noopener">LALG09789 · $388</a>
+          </div>
+        </div>
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-power">Með árs ábyrgð</span>
+            <div class="tier-title">iPhone 16e frá söluaðila</div>
+            <div class="tier-chip">Söluaðili veitir 1 árs ábyrgð</div>
+            <ul class="tier-list">
+              <li><strong>$399</strong>, Bristow VA, rafhlaða 99%, „Good“</li>
+              <li><strong>$415</strong>, Sioux Falls SD, rafhlaða 100%, „Mint“</li>
+            </ul>
+          </div>
+          <div class="box-summary">
+            <a class="buy-link" href="https://swappa.com/listing/view/LAIB23999" target="_blank" rel="noopener">LAIB23999 · $399</a>
+            <a class="buy-link" href="https://swappa.com/listing/view/LALJ73859" target="_blank" rel="noopener">LALJ73859 · $415</a>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Til viðmiðunar: nýr iPhone frá Apple</h2>
+      <p class="subtitle">
+        Apple selur hvorki iPhone 16e né iPhone 15 nýja lengur; ódýrasti nýi síminn er iPhone 17e. Verð er grunnverð í
+        bandarísku Apple-versluninni, ólæstur, án söluskatts. Apple Certified Refurbished átti hvorki iPhone 16e né iPhone 15
+        24. október 2026, aðeins 15 Plus og 15 Pro frá $659.
+      </p>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nýr sími</th><th>Geymsla</th><th>Nývirði</th><th>Notaður til samanburðar</th><th>Sparnaður</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>iPhone 17e</td><td class="dim-highlight">256 GB</td><td><strong>$699</strong></td><td>iPhone 16e 128 GB á $375</td><td><strong>$324</strong> (um helmingur)</td></tr>
+            <tr><td>iPhone 17e</td><td class="dim-highlight">256 GB</td><td><strong>$699</strong></td><td>iPhone 15 128 GB á $355</td><td><strong>$344</strong></td></tr>
+            <tr><td>iPhone 17e</td><td class="dim-highlight">512 GB</td><td><strong>$899</strong></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box-summary">
+        <a class="buy-link" href="https://www.apple.com/shop/buy-iphone/iphone-17e" target="_blank" rel="noopener">Apple · kaupa iPhone 17e</a>
+        <a class="buy-link" href="https://www.apple.com/shop/refurbished/iphone" target="_blank" rel="noopener">Apple · Certified Refurbished iPhone</a>
+      </div>
+
+      <h3>Nývirði á Íslandi: Epli.is</h3>
+      <p class="subtitle">
+        Epli selur enn iPhone 16e nýjan, nú á tilboði. Verð er með 24% virðisaukaskatti og ber því að bera saman við dálkinn
+        „Án VSK í dollurum“. Þannig reiknað er nýr 16e hjá Epli um $216 dýrari en notaður á Swappa, og 17e um $155 dýrari en hjá Apple í Bandaríkjunum.
+        Dollaraverð er á sama kortagengi og á síðu 5: Visa-gengi 24. október 2026, 121,94 kr., að viðbættu 0,70% gengisálagi indó sparisjóðs, eða 122,79 kr.
+      </p>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Nýr sími</th><th>Geymsla</th><th>Verð hjá Epli</th><th>Í dollurum</th><th>Án VSK í dollurum</th><th>Hlekkur</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>iPhone 16e (tilboð, áður 114.990 kr)</td><td class="dim-highlight">128 GB</td><td><strong>89.990 kr</strong></td><td>$733</td><td><strong>$591</strong></td><td><a href="https://www.epli.is/iphone/iphone-16e/iphone-16e/" target="_blank" rel="noopener">Epli</a></td></tr>
+            <tr><td>iPhone 17e</td><td class="dim-highlight">256 GB</td><td><strong>129.990 kr</strong></td><td>$1.059</td><td><strong>$854</strong></td><td><a href="https://www.epli.is/iphone/iphone-17e/iphone-17e/" target="_blank" rel="noopener">Epli</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box-summary">
+        <a class="buy-link" href="https://www.epli.is/iphone/" target="_blank" rel="noopener">Epli · iPhone</a>
+        <a class="buy-link" href="https://www.visa.co.uk/support/consumer/travel-support/exchange-rate-calculator.html" target="_blank" rel="noopener">Visa · gengisreiknivél</a>
+        <a class="buy-link" href="https://www.indo.is/verdskra" target="_blank" rel="noopener">indó · verðskrá (gengisálag 0,70%)</a>
+      </div>
+
+      <h2 class="section-title">iPhone 16e, ólæstur, 128 GB</h2>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Ástand</th><th>Rafhlaða</th><th>Verð</th><th>Í krónum</th><th>Staður / athugasemd</th><th>Hlekkur</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>„Fair“</td><td class="dim-highlight">100%</td><td><strong>$375</strong></td><td>46.046 kr</td><td>Garland TX</td><td><a href="https://swappa.com/listing/view/LAKN32922" target="_blank" rel="noopener">LAKN32922</a></td></tr>
+            <tr><td>„Good“</td><td class="dim-highlight">100%</td><td><strong>$393</strong></td><td>48.256 kr</td><td>Oldsmar FL, 30 daga ábyrgð</td><td><a href="https://swappa.com/listing/view/LAKS03872" target="_blank" rel="noopener">LAKS03872</a></td></tr>
+            <tr><td>„Good“</td><td class="dim-highlight">99%</td><td><strong>$399</strong></td><td>48.993 kr</td><td>Bristow VA, 1 árs ábyrgð</td><td><a href="https://swappa.com/listing/view/LAIB23999" target="_blank" rel="noopener">LAIB23999</a></td></tr>
+            <tr><td>„Mint“</td><td class="dim-highlight">100%</td><td><strong>$415</strong></td><td>50.958 kr</td><td>Sioux Falls SD, 1 árs ábyrgð</td><td><a href="https://swappa.com/listing/view/LALJ73859" target="_blank" rel="noopener">LALJ73859</a></td></tr>
+            <tr><td>„Good“</td><td class="dim-highlight">100%</td><td><strong>$425</strong></td><td>52.186 kr</td><td>Wilsonville OR, næst Seattle af söluaðilunum</td><td><a href="https://swappa.com/listing/view/LAHZ60582" target="_blank" rel="noopener">LAHZ60582</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title">iPhone 15, ólæstur, 128 GB</h2>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Ástand</th><th>Rafhlaða</th><th>Verð</th><th>Í krónum</th><th>Staður / athugasemd</th><th>Hlekkur</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>„Fair“</td><td class="dim-highlight">85%</td><td><strong>$355</strong></td><td>43.590 kr</td><td>Sioux Falls SD, 1 árs ábyrgð</td><td><a href="https://swappa.com/listing/view/LALK17022" target="_blank" rel="noopener">LALK17022</a></td></tr>
+            <tr><td>„Good“</td><td class="dim-highlight">88%</td><td><strong>$385</strong></td><td>47.274 kr</td><td>Sioux Falls SD, 1 árs ábyrgð</td><td><a href="https://swappa.com/listing/view/LALK33439" target="_blank" rel="noopener">LALK33439</a></td></tr>
+            <tr><td>„Good“</td><td class="dim-highlight">90%</td><td><strong>$388</strong></td><td>47.643 kr</td><td>Oldsmar FL, 30 daga ábyrgð</td><td><a href="https://swappa.com/listing/view/LALG09789" target="_blank" rel="noopener">LALG09789</a></td></tr>
+            <tr><td>„Good“</td><td class="dim-highlight">100%</td><td><strong>$399</strong></td><td>48.993 kr</td><td>Gurnee IL</td><td><a href="https://swappa.com/listing/view/LALF33329" target="_blank" rel="noopener">LALF33329</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="subtitle">
+        iPhone 16e hefur ekki MagSafe og ekki Dynamic Island; hvorugt skiptir máli fyrir prófanir. Leit á Craigslist í Seattle
+        að „iphone 16e“ skilaði aðeins nýjum, innsigluðum síma á $570, sem er dýrara en notaðir símar á Swappa.
+      </p>
+
+      <div class="alert-box">
+        <p><strong>Áður en greitt er, alltaf:</strong></p>
+        <ul>
+          <li>Í <code>Settings › General › About</code> verður <strong>Carrier Lock</strong> að segja <strong>No SIM restrictions</strong>. Annars virkar íslenskt SIM ekki.</li>
+          <li>Seljandi skráir sig út af Apple ID og slekkur á Find My. Eftir endurræsingu á síminn að opna á „Hello“, aldrei á „iPhone Locked to Owner“.</li>
+          <li>Í <code>Settings › Battery › Battery Health</code> á hámarksgeta að vera 80% eða meira og rafhlaðan merkt sem upprunaleg Apple-rafhlaða.</li>
+          <li>Fá kvittun með verði. Tollurinn reiknar gjöld af kaupverði auk sendingarkostnaðar.</li>
+          <li>Á Swappa: greiða aðeins í gegnum Swappa (PayPal), aldrei beint til seljanda.</li>
+        </ul>
+      </div>
+
+      <h2 class="section-title">Allar auglýsingar eftir flokkum</h2>
+      <div class="info-grid">
+        <div class="info-card"><h3><a href="https://swappa.com/listings/apple-iphone-16e?carrier=unlocked&amp;storage=128gb" target="_blank" rel="noopener">Swappa: iPhone 16e</a></h3><p>Ólæstur, 128 GB</p></div>
+        <div class="info-card"><h3><a href="https://swappa.com/listings/apple-iphone-15?carrier=unlocked&amp;storage=128gb" target="_blank" rel="noopener">Swappa: iPhone 15</a></h3><p>Ólæstur, 128 GB</p></div>
+        <div class="info-card"><h3><a href="https://seattle.craigslist.org/search/moa?query=iphone%2016e" target="_blank" rel="noopener">Craigslist Seattle: „iphone 16e“</a></h3><p>Staðbundin sala, sótt og greitt á staðnum</p></div>
+      </div>
+
+      <footer>
+        <span>Tækninefnd · Símar á markaði (24. október 2026)</span>
+        <a href="andri.html">&larr; Til baka á 2. iPhone + Pixel + 32 GB Mac</a>
+      </footer>
+    </div>
+  </body>
+</html>
