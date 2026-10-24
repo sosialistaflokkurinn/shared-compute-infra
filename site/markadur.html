@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vélar á markaði · 32 GB eða meira</title>
+    <style>
+      :root {
+        --bg: #0f1419;
+        --card: #182028;
+        --card-alt: #1e2934;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --red: #dc2626;
+        --red-soft: rgba(220, 38, 38, 0.16);
+        --green: #10b981;
+        --green-soft: rgba(16, 185, 129, 0.14);
+        --blue: #3b82f6;
+        --blue-soft: rgba(59, 130, 246, 0.16);
+        --amber: #f59e0b;
+        --amber-soft: rgba(245, 158, 11, 0.14);
+        --border: #2a3644;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .top-nav {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .nav-tab {
+        display: inline-block;
+        padding: 0.45rem 0.95rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        background: var(--card);
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .nav-tab.active {
+        background: var(--red-soft);
+        color: #ffffff;
+        border-color: var(--red);
+      }
+      .nav-tab:hover {
+        color: #ffffff;
+        border-color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        background: var(--amber-soft);
+        color: #fcd34d;
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+        margin: 0.75rem 0 0.5rem;
+        line-height: 1.2;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 1.06rem;
+        margin: 0 0 2rem;
+        max-width: 800px;
+      }
+      .section-title {
+        font-size: 1.32rem;
+        margin: 2.5rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.45rem;
+      }
+      .dim-table-wrap {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow-x: auto;
+        margin-bottom: 2rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+        min-width: 660px;
+      }
+      th, td {
+        padding: 0.85rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        background: var(--card-alt);
+        color: var(--muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      .dim-highlight {
+        color: #6ee7b7;
+        font-weight: 700;
+      }
+      .tier-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.15rem;
+      }
+      .tier-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .tier-card.featured {
+        border: 2px solid var(--green);
+        background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--card) 100%);
+      }
+      .tier-pill {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.22rem 0.65rem;
+        border-radius: 999px;
+        margin-bottom: 0.75rem;
+        width: fit-content;
+      }
+      .pill-best {
+        background: var(--green-soft);
+        color: #6ee7b7;
+      }
+      .pill-good {
+        background: var(--blue-soft);
+        color: #93c5fd;
+      }
+      .pill-power {
+        background: var(--amber-soft);
+        color: #fcd34d;
+      }
+      .tier-title {
+        font-size: 1.28rem;
+        font-weight: 700;
+        margin: 0 0 0.25rem;
+      }
+      .tier-chip {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .tier-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.25rem;
+        font-size: 0.91rem;
+      }
+      .tier-list li {
+        padding: 0.36rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .tier-list li:last-child {
+        border-bottom: 0;
+      }
+      .box-summary {
+        background: var(--card-alt);
+        border-radius: 10px;
+        padding: 0.9rem 1rem;
+        margin-top: auto;
+      }
+      .box-size {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+      .box-sub {
+        font-size: 0.84rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+      .diagram-box {
+        background: #121820;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1.5rem;
+        margin: 1.5rem 0 2rem;
+        overflow-x: auto;
+      }
+      .diagram-box svg {
+        width: 100%;
+        height: auto;
+        min-width: 660px;
+        display: block;
+      }
+      .alert-box {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(24, 32, 40, 0.95));
+        border: 2px solid var(--amber);
+        border-radius: 16px;
+        padding: 1.35rem 1.5rem;
+        margin-top: 2rem;
+      }
+      .alert-title {
+        font-size: 1.12rem;
+        font-weight: 800;
+        color: #fcd34d;
+        margin: 0 0 0.45rem;
+      }
+      .alert-box p, .alert-box li {
+        font-size: 0.92rem;
+        color: var(--text);
+      }
+      .alert-box ul {
+        margin: 0.5rem 0 0;
+        padding-left: 1.25rem;
+      }
+      .alert-box li {
+        margin-bottom: 0.35rem;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .info-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+      }
+      .info-card h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.05rem;
+      }
+      .info-card p {
+        margin: 0;
+        font-size: 0.91rem;
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      footer a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+      .buy-link {
+        display: block;
+        color: #93c5fd;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.2rem 0;
+      }
+      .buy-link:hover,
+      td a,
+      .info-card h3 a {
+        color: #93c5fd;
+      }
+      code {
+        background: var(--card-alt);
+        padding: 0.1rem 0.35rem;
+        border-radius: 6px;
+        font-size: 0.85em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="top-nav">
+        <a class="nav-tab" href="./">1. Stúdíó-tölva (Fyrir stúdíó)</a>
+        <a class="nav-tab" href="andri.html">2. iPhone + Pixel + 32 GB Mac</a>
+        <a class="nav-tab" href="dev-flow.html">3. Þróunarflæði &amp; Tengingar</a>
+        <a class="nav-tab" href="shipping.html">4. Stærðir &amp; Pakkasending</a>
+        <a class="nav-tab active" href="markadur.html">5. Vélar á markaði núna</a>
+      </nav>
+
+      <span class="badge">Hver hlekkur opnaður og staðfestur 24. október 2026</span>
+      <h1>Vélar á markaði núna: 32 GB minni eða meira</h1>
+      <p class="subtitle">
+        Lágmarkið er <strong>32 GB vinnsluminni</strong> og Mac Studio er fyrsti kostur. Hér eru notaðar vélar
+        sem eru til sölu núna á Swappa (sendar innan Bandaríkjanna) og Craigslist (Seattle-svæðið).
+        Allir hlekkir voru opnaðir í vafra og verð og staða borin saman við auglýsinguna. Auglýsingar seljast
+        hratt, svo opnið hlekkinn áður en ákveðið er. Verð eru í Bandaríkjadölum, án sendingarkostnaðar og skatts.
+      </p>
+
+      <h2 class="section-title">Meðmæli</h2>
+      <div class="tier-grid">
+        <div class="tier-card featured">
+          <div>
+            <span class="tier-pill pill-best">Ódýrasta Mac Studio</span>
+            <div class="tier-title">Mac Studio M1 Max</div>
+            <div class="tier-chip">32 GB · 512 GB · 24 kjarna GPU · 2022</div>
+            <ul class="tier-list">
+              <li><strong>$1.236</strong>, Merrimack NH, lyklaborð fylgir</li>
+              <li><strong>$1.248</strong>, Fishers IN, ástand „Mint“</li>
+              <li>Uppfyllir allar kröfur leiðarvísisins</li>
+            </ul>
+          </div>
+          <div class="box-summary">
+            <a class="buy-link" href="https://swappa.com/listing/view/LALG81980" target="_blank" rel="noopener">LALG81980 · $1.236</a>
+            <a class="buy-link" href="https://swappa.com/listing/view/LAIX33465" target="_blank" rel="noopener">LAIX33465 · $1.248</a>
+          </div>
+        </div>
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-good">Nýrri kynslóð</span>
+            <div class="tier-title">Mac Studio M2 Max</div>
+            <div class="tier-chip">32 GB · 512 GB · 30 kjarna GPU · 2023</div>
+            <ul class="tier-list">
+              <li><strong>$1.540</strong>, Cleveland OH, ástand „Mint“</li>
+              <li>Um $300 dýrari en M1 Max, hraðari örgjörvi og GPU</li>
+            </ul>
+          </div>
+          <div class="box-summary">
+            <a class="buy-link" href="https://swappa.com/listing/view/LALI42235" target="_blank" rel="noopener">LALI42235 · $1.540</a>
+          </div>
+        </div>
+        <div class="tier-card">
+          <div>
+            <span class="tier-pill pill-power">Nálægt Seattle</span>
+            <div class="tier-title">Hægt að sækja og prófa</div>
+            <div class="tier-chip">Seljandi á Seattle-svæðinu</div>
+            <ul class="tier-list">
+              <li><strong>$2.200</strong> Mac Studio M1 Ultra, 64 GB, um 1 TB, Seward Park (Craigslist, staðgreiðsla við afhendingu)</li>
+              <li><strong>$2.200</strong> Mac Studio M4 Max, 36 GB, 1 TB, Duvall WA, AppleCare+ til júlí 2028 (Swappa)</li>
+            </ul>
+          </div>
+          <div class="box-summary">
+            <a class="buy-link" href="https://www.craigslist.org/view/d/seattle-mac-studio/1F1RW9GJf7WatFmdWj8vwe" target="_blank" rel="noopener">Craigslist · M1 Ultra · $2.200</a>
+            <a class="buy-link" href="https://swappa.com/listing/view/LALJ50947" target="_blank" rel="noopener">LALJ50947 · M4 Max · $2.200</a>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Mac Studio 2022 (M1 Max / M1 Ultra)</h2>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Örgjörvi</th><th>Minni</th><th>SSD</th><th>Verð</th><th>Staður / athugasemd</th><th>Hlekkur</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>M1 Max, 24 GPU</td><td class="dim-highlight">32 GB</td><td>512 GB</td><td><strong>$1.236</strong></td><td>Merrimack NH, lyklaborð fylgir</td><td><a href="https://swappa.com/listing/view/LALG81980" target="_blank" rel="noopener">LALG81980</a></td></tr>
+            <tr><td>M1 Max, 24 GPU</td><td class="dim-highlight">32 GB</td><td>512 GB</td><td><strong>$1.248</strong></td><td>Fishers IN, „Mint“</td><td><a href="https://swappa.com/listing/view/LAIX33465" target="_blank" rel="noopener">LAIX33465</a></td></tr>
+            <tr><td>M1 Max, 32 GPU</td><td class="dim-highlight">32 GB</td><td>512 GB</td><td><strong>$1.813</strong></td><td>Lawrence KS, söluaðili með 60 daga skilarétt</td><td><a href="https://swappa.com/listing/view/LAJW80477" target="_blank" rel="noopener">LAJW80477</a></td></tr>
+            <tr><td>M1 Max, 24 GPU</td><td class="dim-highlight">32 GB</td><td>1 TB</td><td><strong>$1.839</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LAKH13765" target="_blank" rel="noopener">LAKH13765</a></td></tr>
+            <tr><td>M1 Max, 24 GPU</td><td class="dim-highlight">64 GB</td><td>1 TB</td><td><strong>$1.844</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LAKH16705" target="_blank" rel="noopener">LAKH16705</a></td></tr>
+            <tr><td>M1 Max, 24 GPU</td><td class="dim-highlight">32 GB</td><td>1 TB</td><td><strong>$1.854</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LAJW53648" target="_blank" rel="noopener">LAJW53648</a></td></tr>
+            <tr><td>M1 Max, 24 GPU</td><td class="dim-highlight">64 GB</td><td>2 TB</td><td><strong>$2.163</strong></td><td>La Jolla CA</td><td><a href="https://swappa.com/listing/view/LALH02598" target="_blank" rel="noopener">LALH02598</a></td></tr>
+            <tr><td>M1 Ultra</td><td class="dim-highlight">64 GB</td><td>um 1 TB</td><td><strong>$2.200</strong></td><td>Seattle (Seward Park), sótt og staðgreitt</td><td><a href="https://www.craigslist.org/view/d/seattle-mac-studio/1F1RW9GJf7WatFmdWj8vwe" target="_blank" rel="noopener">Craigslist</a></td></tr>
+            <tr><td>M1 Max, 24 GPU</td><td class="dim-highlight">32 GB</td><td>2 TB</td><td><strong>$2.205</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LAFZ46455" target="_blank" rel="noopener">LAFZ46455</a></td></tr>
+            <tr><td>M1 Ultra, 48 GPU</td><td class="dim-highlight">64 GB</td><td>2 TB</td><td><strong>$3.961</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LAJW19393" target="_blank" rel="noopener">LAJW19393</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title">Mac Studio 2023 (M2 Max / M2 Ultra)</h2>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Örgjörvi</th><th>Minni</th><th>SSD</th><th>Verð</th><th>Staður / athugasemd</th><th>Hlekkur</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>M2 Max, 30 GPU</td><td class="dim-highlight">32 GB</td><td>512 GB</td><td><strong>$1.540</strong></td><td>Cleveland OH, „Mint“</td><td><a href="https://swappa.com/listing/view/LALI42235" target="_blank" rel="noopener">LALI42235</a></td></tr>
+            <tr><td>M2 Max, 30 GPU</td><td class="dim-highlight">32 GB</td><td>1 TB</td><td><strong>$1.751</strong></td><td>Frankford DE</td><td><a href="https://swappa.com/listing/view/LALB68525" target="_blank" rel="noopener">LALB68525</a></td></tr>
+            <tr><td>M2 Max, 30 GPU</td><td class="dim-highlight">32 GB</td><td>512 GB</td><td><strong>$2.143</strong></td><td>Lawrence KS, ástand „Fair“</td><td><a href="https://swappa.com/listing/view/LAKH43831" target="_blank" rel="noopener">LAKH43831</a></td></tr>
+            <tr><td>M2 Ultra, 60 GPU</td><td class="dim-highlight">64 GB</td><td>1 TB</td><td><strong>$2.678</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LALH56742" target="_blank" rel="noopener">LALH56742</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title">Mac Studio 2025 (M4 Max)</h2>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Örgjörvi</th><th>Minni</th><th>SSD</th><th>Verð</th><th>Staður / athugasemd</th><th>Hlekkur</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>M4 Max, 14 kjarna</td><td class="dim-highlight">36 GB</td><td>512 GB</td><td><strong>$1.800</strong></td><td>Atlanta GA, „Mint“</td><td><a href="https://swappa.com/listing/view/LALH09278" target="_blank" rel="noopener">LALH09278</a></td></tr>
+            <tr><td>M4 Max, 14 kjarna</td><td class="dim-highlight">36 GB</td><td>1 TB</td><td><strong>$2.200</strong></td><td>Duvall WA (nálægt Seattle), AppleCare+ til júlí 2028</td><td><a href="https://swappa.com/listing/view/LALJ50947" target="_blank" rel="noopener">LALJ50947</a></td></tr>
+            <tr><td>M4 Max, 14 kjarna</td><td class="dim-highlight">36 GB</td><td>512 GB</td><td><strong>$2.241</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LAKH33658" target="_blank" rel="noopener">LAKH33658</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title">Varakostur: Mac mini með 32 GB eða meira</h2>
+      <div class="dim-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Örgjörvi</th><th>Minni</th><th>SSD</th><th>Verð</th><th>Staður / athugasemd</th><th>Hlekkur</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>M4</td><td class="dim-highlight">32 GB</td><td>256 GB</td><td><strong>$1.185</strong></td><td>Westerville OH. Undir 512 GB kröfunni</td><td><a href="https://swappa.com/listing/view/LALD15572" target="_blank" rel="noopener">LALD15572</a></td></tr>
+            <tr><td>M4</td><td class="dim-highlight">32 GB</td><td>1 TB</td><td><strong>$1.442</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LALD08931" target="_blank" rel="noopener">LALD08931</a></td></tr>
+            <tr><td>M4 Pro, 14 kjarna</td><td class="dim-highlight">48 GB</td><td>1 TB</td><td><strong>$2.060</strong></td><td>Sjá auglýsingu</td><td><a href="https://swappa.com/listing/view/LAJE92448" target="_blank" rel="noopener">LAJE92448</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="subtitle">
+        Mac Studio M1 Max með 32 GB og 512 GB kostar nánast það sama og Mac mini M4 með 32 GB og 256 GB,
+        svo Mac mini borgar sig aðeins ef Mac Studio er uppseld. Engin Mac mini 2023 (M2 Pro) með 32 GB var til
+        sölu á Swappa, og leit á Craigslist í Seattle að „mac mini 32gb“ skilaði engu.
+      </p>
+
+      <div class="alert-box">
+        <p><strong>Áður en greitt er, alltaf:</strong></p>
+        <ul>
+          <li>Biðja seljanda um að keyra <code>system_profiler SPHardwareDataType | grep "Activation Lock"</code>. Það verður að segja <strong>Disabled</strong>.</li>
+          <li>Keyra <code>profiles status -type enrollment</code>. Bæði DEP og MDM verða að segja <strong>No</strong>; annars er vélin í eigu fyrirtækis.</li>
+          <li>Fá kvittun með verði. Tollurinn reiknar gjöld af kaupverði auk sendingarkostnaðar.</li>
+          <li>Á Craigslist: hittast á öruggum stað, ræsa vélina og prófa Ethernet og USB áður en greitt er.</li>
+          <li>Á Swappa: greiða aðeins í gegnum Swappa (PayPal), aldrei beint til seljanda.</li>
+        </ul>
+      </div>
+
+      <h2 class="section-title">Allar auglýsingar eftir flokkum</h2>
+      <div class="info-grid">
+        <div class="info-card"><h3><a href="https://swappa.com/listings/mac-studio" target="_blank" rel="noopener">Swappa: Mac Studio 2022</a></h3><p>M1 Max og M1 Ultra</p></div>
+        <div class="info-card"><h3><a href="https://swappa.com/listings/mac-studio-2023" target="_blank" rel="noopener">Swappa: Mac Studio 2023</a></h3><p>M2 Max og M2 Ultra</p></div>
+        <div class="info-card"><h3><a href="https://swappa.com/listings/mac-studio-2024" target="_blank" rel="noopener">Swappa: Mac Studio 2025</a></h3><p>M4 Max</p></div>
+        <div class="info-card"><h3><a href="https://swappa.com/listings/mac-mini-2024" target="_blank" rel="noopener">Swappa: Mac mini 2024</a></h3><p>M4 og M4 Pro</p></div>
+        <div class="info-card"><h3><a href="https://seattle.craigslist.org/search/sya?query=mac%20studio" target="_blank" rel="noopener">Craigslist Seattle: „mac studio“</a></h3><p>Staðbundin sala, sótt og greitt á staðnum</p></div>
+      </div>
+
+      <footer>
+        <span>Tækninefnd · Vélar á markaði (24. október 2026)</span>
+        <a href="./">&larr; Til baka á 1. Stúdíó-tölvusíðuna</a>
+      </footer>
+    </div>
+  </body>
+</html>
