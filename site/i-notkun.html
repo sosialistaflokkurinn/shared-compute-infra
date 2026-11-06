@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="is">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Í notkun í dag · Vélar og keyrsluumhverfi</title>
+    <style>
+      :root {
+        --bg: #0f1419;
+        --card: #182028;
+        --card-alt: #1e2934;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+        --red: #dc2626;
+        --red-soft: rgba(220, 38, 38, 0.16);
+        --green: #10b981;
+        --green-soft: rgba(16, 185, 129, 0.14);
+        --blue: #3b82f6;
+        --blue-soft: rgba(59, 130, 246, 0.16);
+        --amber: #f59e0b;
+        --amber-soft: rgba(245, 158, 11, 0.14);
+        --purple: #a855f7;
+        --purple-soft: rgba(168, 85, 247, 0.15);
+        --border: #2a3644;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .top-nav {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .nav-tab {
+        display: inline-block;
+        padding: 0.45rem 0.95rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        background: var(--card);
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .nav-tab.active {
+        background: var(--red-soft);
+        color: #ffffff;
+        border-color: var(--red);
+      }
+      .nav-tab:hover {
+        color: #ffffff;
+        border-color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        background: var(--green-soft);
+        color: #6ee7b7;
+        border: 1px solid rgba(16, 185, 129, 0.4);
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+        margin: 0.75rem 0 0.5rem;
+        line-height: 1.2;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 1.06rem;
+        margin: 0 0 2rem;
+        max-width: 800px;
+      }
+      .section-title {
+        font-size: 1.32rem;
+        margin: 2.5rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.45rem;
+      }
+      .diagram-box {
+        background: #121820;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 1.5rem;
+        margin: 1.5rem 0 2rem;
+        overflow-x: auto;
+      }
+      .diagram-box svg {
+        width: 100%;
+        height: auto;
+        min-width: 680px;
+        display: block;
+      }
+      .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.15rem;
+      }
+      .flow-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.35rem;
+      }
+      .flow-card.highlight-green {
+        border-color: rgba(16, 185, 129, 0.5);
+      }
+      .flow-card.highlight-blue {
+        border-color: rgba(59, 130, 246, 0.5);
+      }
+      .flow-card.highlight-purple {
+        border-color: rgba(168, 85, 247, 0.5);
+      }
+      .flow-pill {
+        display: inline-block;
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.2rem 0.65rem;
+        border-radius: 999px;
+        margin-bottom: 0.7rem;
+      }
+      .pill-green {
+        background: var(--green-soft);
+        color: #6ee7b7;
+      }
+      .pill-blue {
+        background: var(--blue-soft);
+        color: #93c5fd;
+      }
+      .pill-purple {
+        background: var(--purple-soft);
+        color: #d8b4fe;
+      }
+      .flow-card h3 {
+        margin: 0 0 0.45rem;
+        font-size: 1.18rem;
+      }
+      .flow-card p {
+        margin: 0 0 0.75rem;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+      .flow-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      .flow-list li {
+        padding: 0.35rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      code {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 0.15rem 0.4rem;
+        border-radius: 5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.84em;
+        color: #fde68a;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1.25rem;
+      }
+      .metric-card {
+        background: var(--card-alt);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.15rem;
+      }
+      .metric-label {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+      }
+      .metric-val {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0.25rem 0;
+      }
+      .metric-sub {
+        font-size: 0.84rem;
+        color: var(--muted);
+        margin: 0;
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      footer a {
+        color: #93c5fd;
+        text-decoration: none;
+      }
+      .price-usd {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #ffffff;
+      }
+      .price-isk {
+        font-size: 0.86rem;
+        color: var(--muted);
+        margin-bottom: 0.75rem;
+      }
+      .as-of-banner {
+        background: var(--amber-soft);
+        border: 1px solid var(--amber);
+        border-radius: 8px;
+        padding: 0.6rem 0.9rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p class="as-of-banner" data-as-of="2026-10-24">Verðin miðast við 24. október 2026 (gengi 122,79 kr á dollara) og kunna að hafa breyst síðan.</p>
+      <nav class="top-nav">
+        <a class="nav-tab active" href="i-notkun.html">Í notkun í dag</a>
+        <a class="nav-tab" href="./">1. Stúdíó-tölva (Fyrir stúdíó)</a>
+        <a class="nav-tab" href="andri.html">2. iPhone + Pixel + 32 GB Mac</a>
+        <a class="nav-tab" href="dev-flow.html">3. Þróunarflæði &amp; Tengingar</a>
+        <a class="nav-tab" href="shipping.html">4. Stærðir &amp; Pakkasending</a>
+        <a class="nav-tab" href="markadur.html">5. Vélar á markaði núna</a>
+        <a class="nav-tab" href="simar.html">6. Símar á markaði</a>
+      </nav>
+
+      <span class="badge">Staðan 6. nóvember 2026</span>
+      <h1>Í notkun í dag: vélar og keyrsluumhverfi</h1>
+      <p class="subtitle">
+        Hinar síðurnar fjalla um það sem mætti kaupa. Þessi síða lýsir því sem við notum núna: leigðri
+        <strong>Mac mini</strong>-tölvu, skammlífum keyrsluvélum á <strong>Google Cloud</strong>, fartölvu
+        forritarans og prófunarsíma. Leigða tölvan er æfing fyrir eigin Mac-tölvu: hún sýnir hvað 16 GB
+        duga í raun áður en keypt er.
+      </p>
+
+      <h2 class="section-title">1. Vélarnar</h2>
+      <div class="flow-grid">
+        <div class="flow-card highlight-green">
+          <span class="flow-pill pill-green">Aðalbraut</span>
+          <h3>Leigð Mac mini (MyRemoteMac)</h3>
+          <div class="price-usd">$85 á mánuði auk skatts</div>
+          <div class="price-isk">~10.400 kr á mánuði</div>
+          <ul class="flow-list">
+            <li>Mac mini M4, 10 kjarnar, 16 GB vinnsluminni, 256 GB diskur, macOS 26.</li>
+            <li>Leigð frá 23. október 2026, mánaðaráskrift sem má segja upp um hver mánaðamót. Næsta endurnýjun er 23. nóvember 2026.</li>
+            <li>Frá 6. nóvember 2026 tekur hún sjálfgefið við prófunum, útgáfum og tímasettum verkum (brautin <code>samtak-mac-spill</code>) í xj-greenfield, samtak-vefur og gognin, auk iOS-smíði samtak-spjall.</li>
+            <li>Á henni keyra sjö keyrsluvélar fyrir GitHub Actions: þrjár fyrir <code>samtak-svf</code>, þrjár fyrir <code>sosialistaflokkurinn</code> og ein fyrir gognin.</li>
+            <li>Forritarinn sendir líka þung verk á hana beint úr fartölvunni: próf, Gradle- og Xcode-smíði og Android-hermi.</li>
+          </ul>
+        </div>
+
+        <div class="flow-card highlight-blue">
+          <span class="flow-pill pill-blue">Varabraut</span>
+          <h3>Keyrsluvélar á Google Cloud</h3>
+          <ul class="flow-list">
+            <li>Skammlífar keyrsluvélar á Cloud Run Jobs í <code>europe-west1</code>: hver vél keyrir eitt verk og hverfur svo (<code>actions-runners-gcp</code>).</li>
+            <li>Brautir: <code>gcp-ci</code> (4 vCPU, 8 GiB), <code>gcp-deploy</code> og <code>gcp-android</code> (16 GiB, fyrir Android-smíði).</li>
+            <li>Taka við verki á Mac-brautinni ef engin Mac-tölva hefur tekið við því eftir þrjár mínútur.</li>
+            <li>Keyra það sem macOS ræður ekki við: Docker-þjónustur, Linux-próf og Linux-helming afkastamælinga.</li>
+            <li>Greitt eftir notkun.</li>
+          </ul>
+        </div>
+
+        <div class="flow-card highlight-purple">
+          <span class="flow-pill pill-purple">Þróun</span>
+          <h3>Fartölva forritarans (Fedora)</h3>
+          <ul class="flow-list">
+            <li>Lenovo-fartölva, Intel Core i5-1235U (10 kjarnar), 16 GB vinnsluminni, 512 GB diskur, Fedora 44.</li>
+            <li>Þar fer þróunin fram: ritill, vafri og gervigreindarlotur.</li>
+            <li>Tvær keyrsluvélar: <code>fedora-fallback</code> (til vara ef hinar brautirnar stöðvast) og <code>fedora-icelandic-data</code> (gögn sem eru geymd á vélinni).</li>
+            <li>16 GB fyllast þegar mörg prófasöfn keyra samtímis. Þess vegna fara þung verk á Mac-tölvuna.</li>
+          </ul>
+        </div>
+
+        <div class="flow-card">
+          <span class="flow-pill pill-blue">Hýst</span>
+          <h3>Keyrsluvélar GitHub</h3>
+          <ul class="flow-list">
+            <li>iOS-prófanir borgarland keyra á <code>macos-latest</code>: geymslan er opin og mínúturnar því ókeypis.</li>
+            <li>Undirritun og útgáfa iOS-forrita keyra þar enn um sinn.</li>
+          </ul>
+        </div>
+
+        <div class="flow-card">
+          <span class="flow-pill pill-green">Sími</span>
+          <h3>Prófunarsími</h3>
+          <ul class="flow-list">
+            <li>Samsung Galaxy S23 til að prófa nýjar útgáfur samtak-spjall, við hlið útgáfunnar úr Play Store.</li>
+            <li>Engir sérstakir iPhone- eða Pixel-símar eru til enn; síður 2 og 6 fjalla um kaup á þeim.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="section-title">2. Hverju kaupin myndu breyta</h2>
+      <ul class="flow-list">
+        <li>Eigin 32 GB Mac-tölva (síður 1 og 2) tæki við af leigðu tölvunni og keyrsluvélarnar færðust yfir á hana. Leigunni yrði þá sagt upp.</li>
+        <li>Prófunarsímarnir (síða 6) yrðu tengdir Mac-tölvunni eins og lýst er á síðu 3, í stað þess að Android-hermir keyri á leigðu tölvunni.</li>
+        <li>Keyrsluvélar á Google Cloud yrðu áfram varabraut og keyrðu það sem macOS ræður ekki við.</li>
+      </ul>
+
+      <footer>
+        <span>Tækninefnd · Í notkun í dag (6. nóvember 2026)</span>
+        <a href="./">Sjá næst: 1. Stúdíó-tölva &rarr;</a>
+      </footer>
+    </div>
+  </body>
+</html>
