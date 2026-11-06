@@ -1,0 +1,6 @@
+{
+  "usdIsk": 122.79,
+  "asOf": "2026-10-24",
+  "vskRate": 1.24,
+  "note": "Card rate: Visa 121.94 ISK/USD plus 0.70% indo markup. Every kr amount derived from a USD price on the site is checked against usdIsk by scripts/check-site.mjs."
+}

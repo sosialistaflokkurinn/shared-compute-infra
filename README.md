@@ -1,6 +1,6 @@
-# Shared Compute Infrastructure (`shared-compute-infra`)
+# Shared Compute Purchasing Guide (`shared-compute-infra`)
 
-Public hardware specification pages for purchasing used Apple Silicon Macs (Mac mini / Mac Studio) and a developer iPhone on the US secondhand market:
+Purchasing guide for the party's shared Mac Studio and developer test phones, published as public Icelandic pages. It compares the US and Icelandic secondhand markets for used Apple Silicon Macs (Mac mini / Mac Studio), an iPhone and a Pixel:
 
 - **Studio Mac specification:** [https://sosialistaflokkurinn.github.io/shared-compute-infra/](https://sosialistaflokkurinn.github.io/shared-compute-infra/)
 - **Developer iPhone, Pixel & 32 GB Mac specification:** [https://sosialistaflokkurinn.github.io/shared-compute-infra/andri.html](https://sosialistaflokkurinn.github.io/shared-compute-infra/andri.html)
@@ -10,3 +10,7 @@ Public hardware specification pages for purchasing used Apple Silicon Macs (Mac 
 - **Dimensions, weights and shipping:** [https://sosialistaflokkurinn.github.io/shared-compute-infra/shipping.html](https://sosialistaflokkurinn.github.io/shared-compute-infra/shipping.html)
 
 The pages are static HTML in `site/`. `.github/workflows/pages.yml` deploys them to GitHub Pages on every push to `main` that touches `site/`.
+
+## Checks
+
+`node scripts/check-site.mjs` validates the pages (tag balance, internal links and anchors, kr amounts recomputed from the single rate in `site/rates.json`, as-of banner, no em dash in text). `node --test test/check-site.test.mjs` runs it against fixtures. CI runs both on pull requests.
