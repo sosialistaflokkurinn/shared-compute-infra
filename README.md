@@ -1,7 +1,8 @@
-# Shared Compute Purchasing Guide (`shared-compute-infra`)
+# Shared compute: in use today, and what to buy (`shared-compute-infra`)
 
-Purchasing guide for the party's shared Mac Studio and developer test phones, published as public Icelandic pages. It compares the US and Icelandic secondhand markets for used Apple Silicon Macs (Mac mini / Mac Studio), an iPhone and a Pixel:
+The party's shared developer compute, published as public Icelandic pages: what runs today (a rented Mac mini, GCP Cloud Run runners, the developer laptop, a test phone) and the purchasing guide for an owned Mac and test phones, comparing the US and Icelandic secondhand markets for used Apple Silicon Macs (Mac mini / Mac Studio), an iPhone and a Pixel:
 
+- **In use today (machines, CI runner lanes, cost):** [https://sosialistaflokkurinn.github.io/shared-compute-infra/i-notkun.html](https://sosialistaflokkurinn.github.io/shared-compute-infra/i-notkun.html)
 - **Studio Mac specification:** [https://sosialistaflokkurinn.github.io/shared-compute-infra/](https://sosialistaflokkurinn.github.io/shared-compute-infra/)
 - **Developer iPhone, Pixel & 32 GB Mac specification:** [https://sosialistaflokkurinn.github.io/shared-compute-infra/andri.html](https://sosialistaflokkurinn.github.io/shared-compute-infra/andri.html)
 - **Used Macs on the market (32 GB or more, US and Iceland):** [https://sosialistaflokkurinn.github.io/shared-compute-infra/markadur.html](https://sosialistaflokkurinn.github.io/shared-compute-infra/markadur.html)
